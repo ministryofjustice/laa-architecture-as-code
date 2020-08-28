@@ -8,8 +8,6 @@ import com.structurizr.model.Model
 import com.structurizr.view.ViewSet
 
 private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
-  Demo,
-  ExternalDemo
 )
 
 private fun defineModelItems(model: Model) {
