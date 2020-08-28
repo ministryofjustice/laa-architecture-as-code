@@ -12,5 +12,4 @@ fun defineStyles(styles: Styles) {
   styles.addElementStyle(Tags.WEB_BROWSER.toString()).shape(Shape.WebBrowser)
 
   styles.addElementStyle(Tags.PROVIDER.toString()).background("#ccff99")
-  styles.addElementStyle(Tags.DEPRECATED.toString()).background("#999999")
 }
