@@ -19,7 +19,11 @@ class CloudPlatform private constructor() {
       s3 = cloudPlatform.addDeploymentNode("S3", "AWS Simple Storage Service", "AWS")
       sns = cloudPlatform.addDeploymentNode("SNS", "AWS Simple Notification Service", "AWS")
       sqs = cloudPlatform.addDeploymentNode("SQS", "AWS Simple Queue Service", "AWS")
-      elasticache = cloudPlatform.addDeploymentNode("ElastiCache", "Managed in-memory data store and cache service", "AWS")
+      elasticache = cloudPlatform.addDeploymentNode(
+        "ElastiCache",
+        "Managed in-memory data store and cache service",
+        "AWS"
+      )
       elasticsearch = cloudPlatform.addDeploymentNode("ElasticSearch", "AWS ElasticSearch Service", "AWS")
       kubernetes = cloudPlatform.addDeploymentNode("Kubernetes", "The Cloud Platform Kubernetes cluster", "Kubernetes")
     }

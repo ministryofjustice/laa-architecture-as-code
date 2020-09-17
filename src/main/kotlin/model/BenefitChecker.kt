@@ -14,16 +14,11 @@ class BenefitChecker private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Benefit Checker",
-        "An interface between the Legal Aid Agency and the Department of " +
-          "Work & Pensions, providing access to the latest pass-ported " +
-          "benefit entitlement checks"
+        "An interface between the Legal Aid Agency and the Department of Work & Pensions, providing access to the " +
+          "latest pass-ported benefit entitlement checks"
       )
 
-      api = system.addContainer(
-        "Benefit Checker API",
-        "An XML API interface for Benefit Checker",
-        "Java"
-      ).apply {
+      api = system.addContainer("Benefit Checker API", "An XML API interface for Benefit Checker", "Java").apply {
         setUrl("https://github.com/ministryofjustice/laa-benefitchecker-1.0-big")
       }
     }
@@ -34,30 +29,14 @@ class BenefitChecker private constructor() {
 
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(
-        system,
-        "benefit-checker-context",
-        null
-      ).apply {
+      views.createSystemContextView(system, "benefit-checker-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(
-        system,
-        "benefit-checker-context-container",
-        null
-      ).apply {
+      views.createContainerView(system, "benefit-checker-context-container", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
     }
   }

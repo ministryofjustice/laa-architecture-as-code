@@ -33,20 +33,12 @@ class CFE private constructor() {
       // declare views here
       views.createSystemContextView(system, "cfe-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
       views.createContainerView(system, "cfe-container", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
     }
   }

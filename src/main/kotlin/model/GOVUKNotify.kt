@@ -11,8 +11,7 @@ class GOVUKNotify private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "GOV.UK Notify",
-        "Sends emails, text messages, and letters to government digital " +
-          "services users"
+        "Sends emails, text messages, and letters to government digital services users"
       ).apply {
         OutsideLAA.addTo(this)
       }

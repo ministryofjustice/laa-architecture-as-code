@@ -10,10 +10,7 @@ class Portal private constructor() {
     lateinit var system: SoftwareSystem
 
     override fun defineModelEntities(model: Model) {
-      system = model.addSoftwareSystem(
-        "Portal",
-        "Signle sign on for the LAA"
-      ).apply {
+      system = model.addSoftwareSystem("Portal", "Single sign on for the LAA").apply {
         setUrl("https://github.com/ministryofjustice/laa-portal")
       }
     }
@@ -24,30 +21,14 @@ class Portal private constructor() {
 
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(
-        system,
-        "portal-context",
-        null
-      ).apply {
+      views.createSystemContextView(system, "portal-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(
-        system,
-        "portal-context-container",
-        null
-      ).apply {
+      views.createContainerView(system, "portal-context-container", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
     }
   }

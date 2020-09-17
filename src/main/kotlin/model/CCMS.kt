@@ -20,26 +20,17 @@ class CCMS private constructor() {
 
       providerDetailsAPI = system.addContainer(
         "Provider Details API",
-        "An XML API to provide reference data required to integrate with " +
-          "CCMS services",
+        "An XML API to provide reference data required to integrate with CCMS services",
         "Java"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-ccms-provider-details-api")
       }
 
-      soa = system.addContainer(
-        "SOA",
-        "An XML API to E-business Suite",
-        "Oracle SOA Suite"
-      ).apply {
+      soa = system.addContainer("SOA", "An XML API to E-business Suite", "Oracle SOA Suite").apply {
         setUrl("https://github.com/ministryofjustice/laa-ccms-app-soa")
       }
 
-      val db = system.addContainer(
-        "CCMS Database",
-        "Stores all data for CCMS",
-        "Oracle"
-      ).apply {
+      val db = system.addContainer("CCMS Database", "Stores all data for CCMS", "Oracle").apply {
         Tags.DATABASE.addTo(this)
       }
 
@@ -52,30 +43,14 @@ class CCMS private constructor() {
 
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(
-        system,
-        "ccms-context",
-        null
-      ).apply {
+      views.createSystemContextView(system, "ccms-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(
-        system,
-        "ccms-context-container",
-        null
-      ).apply {
+      views.createContainerView(system, "ccms-context-container", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(
-          AutomaticLayout.RankDirection.TopBottom,
-          300,
-          300
-        )
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
     }
   }

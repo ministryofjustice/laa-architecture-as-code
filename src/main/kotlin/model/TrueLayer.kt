@@ -9,10 +9,7 @@ class TrueLayer private constructor() {
     lateinit var system: SoftwareSystem
 
     override fun defineModelEntities(model: Model) {
-      system = model.addSoftwareSystem(
-        "TrueLayer",
-        "Open banking data API"
-      ).apply {
+      system = model.addSoftwareSystem("TrueLayer", "Open banking data API").apply {
         OutsideLAA.addTo(this)
       }
     }

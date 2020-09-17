@@ -9,10 +9,7 @@ class Geckoboard private constructor() {
     lateinit var system: SoftwareSystem
 
     override fun defineModelEntities(model: Model) {
-      system = model.addSoftwareSystem(
-        "Geckoboard",
-        "Metrics dashboard"
-      ).apply {
+      system = model.addSoftwareSystem("Geckoboard", "Metrics dashboard").apply {
         OutsideLAA.addTo(this)
       }
     }
