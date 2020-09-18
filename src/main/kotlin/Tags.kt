@@ -10,8 +10,7 @@ enum class Tags : addTo {
       super.addTo(element)
       OutsideLAA.addTo(element)
     }
-  },
-  DEPRECATED;
+  };
 
   // Usage example: Tags.DATABASE.addTo(any_model_element)
   override fun addTo(element: Element) {

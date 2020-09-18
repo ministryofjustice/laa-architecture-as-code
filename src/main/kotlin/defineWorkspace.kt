@@ -8,8 +8,14 @@ import com.structurizr.model.Model
 import com.structurizr.view.ViewSet
 
 private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
-  Demo,
-  ExternalDemo
+  Apply,
+  CCMS,
+  CFE,
+  BenefitChecker,
+  Geckoboard,
+  TrueLayer,
+  GOVUKNotify,
+  Portal
 )
 
 private fun defineModelItems(model: Model) {

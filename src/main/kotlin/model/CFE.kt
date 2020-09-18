@@ -6,38 +6,37 @@ import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
 import com.structurizr.view.ViewSet
 
-class Demo private constructor() {
+class CFE private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
-    lateinit var app: Container
+    lateinit var api: Container
 
     override fun defineModelEntities(model: Model) {
-      system = model.addSoftwareSystem("Demo", "This system is a demonstration, delete me")
+      system = model.addSoftwareSystem(
+        "Check Financial Eligibility",
+        "A service for checking financial eligibility for legal aid")
 
-      app = system.addContainer("Demo UI", "Demo workflow creator", "Ruby on Rails").apply {
-        Tags.WEB_BROWSER.addTo(this)
+      api = system.addContainer(
+        "Check Financial Eligibility API",
+        "A JSON API for Check Financial Eligibility",
+        "Ruby on Rails"
+      ).apply {
+        setUrl("https://github.com/ministryofjustice/check-financial-eligibility")
       }
-
-      val db = system.addContainer("Demo Database", "Stores demo workflows", "PostgreSQL").apply {
-        Tags.DATABASE.addTo(this)
-      }
-
-      app.uses(db, "connects to")
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers here
-      app.uses(ExternalDemo.system, "retrieves demo files from")
+      // declare relationships to other systems and other system containers
     }
 
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(system, "demo-context", null).apply {
+      views.createSystemContextView(system, "cfe-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(system, "demo-container", null).apply {
+      views.createContainerView(system, "cfe-container", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
