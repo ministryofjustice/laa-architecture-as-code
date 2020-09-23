@@ -52,7 +52,7 @@ class Apply private constructor() {
 
     override fun defineRelationships() {
       // system relationships
-      system.uses(CCMS.system, "Gets provider details and reference data from and submits application through")
+      web.uses(CCMS.system, "Gets provider details and reference data from and submits application through")
 
       // container relationships
       web.uses(CCMS.providerDetailsAPI, "Gets provider details from", "REST")
