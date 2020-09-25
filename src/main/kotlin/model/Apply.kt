@@ -69,7 +69,6 @@ class Apply private constructor() {
       // user relationships
       applicant.uses(web, "Provides personal and financial information at")
       applicant.uses(TrueLayer.system, "Gives bank access authorisation to")
-      // applicant.uses(GOVUKNotify.system, "Gets an email from")
       provider.uses(web, "Fills legal aid application through")
       provider.uses(Portal.system, "Provides login credentials through")
       GOVUKNotify.system.delivers(applicant, "Sends email to")
