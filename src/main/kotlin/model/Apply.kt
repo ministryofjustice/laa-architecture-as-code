@@ -5,6 +5,7 @@ import com.structurizr.model.Model
 import com.structurizr.model.Person
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
+import com.structurizr.view.ContainerView
 import com.structurizr.view.ViewSet
 
 class Apply private constructor() {
@@ -69,7 +70,6 @@ class Apply private constructor() {
       // user relationships
       applicant.uses(web, "Provides personal and financial information at")
       applicant.uses(TrueLayer.system, "Gives bank access authorisation to")
-      // applicant.uses(GOVUKNotify.system, "Gets an email from")
       provider.uses(web, "Fills legal aid application through")
       provider.uses(Portal.system, "Provides login credentials through")
       GOVUKNotify.system.delivers(applicant, "Sends email to")
@@ -84,8 +84,15 @@ class Apply private constructor() {
 
       views.createContainerView(system, "apply-container", null).apply {
         addDefaultElements()
+        renderInternalCcmsContainers(this)
+        setExternalSoftwareSystemBoundariesVisible(true)
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
+    }
+
+    private fun renderInternalCcmsContainers(view: ContainerView) {
+      view.remove(CCMS.system)
+      listOf(CCMS.soa, CCMS.providerDetailsAPI).forEach { view.add(it) }
     }
   }
 }
