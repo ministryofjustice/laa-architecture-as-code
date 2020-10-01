@@ -15,7 +15,11 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Geckoboard,
   TrueLayer,
   GOVUKNotify,
-  Portal
+  Portal,
+  FALA,
+  PostcodesIO,
+  CLA,
+  LegalAidAgencyUsers
 )
 
 private fun defineModelItems(model: Model) {
