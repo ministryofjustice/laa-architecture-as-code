@@ -17,13 +17,13 @@ class VCD private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "VCD (View Court Data)", 
+        "View Court Data", 
         "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact " +
           "with the Courts"
       )
 
       web = system.addContainer(
-        "VCD UI",
+        "View Court Data UI",
         "Interface for Application and Billing case workers access the Court's data",
         "Ruby on Rails"
       ).apply {
@@ -31,7 +31,7 @@ class VCD private constructor() {
         Tags.WEB_BROWSER.addTo(this)
       }
 
-      val db = system.addContainer("VCD Database", "Stores user details for the application", "PostgreSQL").apply {
+      val db = system.addContainer("View Court Data Database", "Stores user details for the application", "PostgreSQL").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
