@@ -35,7 +35,7 @@ class VCD private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      web.uses(db, "connects to")
+      web.uses(db, "Connects to")
 
       val sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
@@ -44,8 +44,8 @@ class VCD private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
-      sidekiq.uses(queue, "processes queued jobs from")
-      web.uses(queue, "queues feedback jobs to")
+      sidekiq.uses(queue, "Processes queued jobs from")
+      web.uses(queue, "Queues feedback jobs to")
 
       applicationCaseWorker = model.addPerson(
         "Legal aid application case worker", 
