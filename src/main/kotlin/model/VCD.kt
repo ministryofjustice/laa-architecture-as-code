@@ -55,7 +55,7 @@ class VCD private constructor() {
     }
 
     override fun defineRelationships() {
-      // // user relationships
+      // user relationships
       applicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
       billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
     }
