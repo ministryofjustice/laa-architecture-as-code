@@ -17,8 +17,9 @@ class VCD private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "VCD (View Court Data)",
-        "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact with the Courts"
+        "VCD (View Court Data)", 
+        "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact " +
+          "with the Courts"
       )
 
       web = system.addContainer(
@@ -46,7 +47,10 @@ class VCD private constructor() {
       sidekiq.uses(queue, "processes queued jobs from")
       web.uses(queue, "queues feedback jobs to")
 
-      applicationCaseWorker = model.addPerson("Legal aid application case worker", "Manage applications for criminal legal aid")
+      applicationCaseWorker = model.addPerson(
+        "Legal aid application case worker", 
+        "Manage applications for criminal legal aid"
+      )
       billingCaseWorker = model.addPerson("Legal aid billing case workers", "Verifies legal aid provider's bills")
     }
 
