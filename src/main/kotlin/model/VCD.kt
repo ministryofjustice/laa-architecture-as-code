@@ -49,7 +49,7 @@ class VCD private constructor() {
 
       applicationCaseWorker = model.addPerson(
         "Legal aid application case worker", 
-        "Manage applications for criminal legal aid"
+        "Manages applications for criminal legal aid"
       )
       billingCaseWorker = model.addPerson("Legal aid billing case workers", "Verifies legal aid provider's bills")
     }
