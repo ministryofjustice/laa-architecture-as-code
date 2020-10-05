@@ -6,3 +6,6 @@ build
 
 # external dependencies
 ext/
+
+# Ignore MacOS system files
+.DS_Store
