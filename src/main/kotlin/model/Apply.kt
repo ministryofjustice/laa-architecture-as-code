@@ -60,6 +60,7 @@ class Apply private constructor() {
       web.uses(Geckoboard.system, "Sends metrics to", "REST")
       web.uses(TrueLayer.system, "Gets applicant bank information from", "REST")
       web.uses(GOVUKNotify.system, "Sends email using", "REST")
+      web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
 
       // user relationships
       LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")

@@ -23,7 +23,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   EligibilityCalculator,
   VCD,
   CDA,
-  CommonPlatform
+  CommonPlatform,
+  OSPlacesAPI
 )
 
 private fun defineModelItems(model: Model) {
