@@ -19,7 +19,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   FALA,
   PostcodesIO,
   CLA,
-  LegalAidAgencyUsers
+  LegalAidAgencyUsers,
+  EligibilityCalculator
 )
 
 private fun defineModelItems(model: Model) {
