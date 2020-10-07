@@ -12,8 +12,6 @@ class VCD private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var web: Container
-    lateinit var applicationCaseWorker: Person
-    lateinit var billingCaseWorker: Person
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -46,18 +44,12 @@ class VCD private constructor() {
       }
       sidekiq.uses(queue, "Processes queued jobs from")
       web.uses(queue, "Queues feedback jobs to")
-
-      applicationCaseWorker = model.addPerson(
-        "Legal aid application case worker", 
-        "Manages applications for criminal legal aid"
-      )
-      billingCaseWorker = model.addPerson("Legal aid billing case workers", "Verifies legal aid provider's bills")
     }
 
     override fun defineRelationships() {
       // user relationships
-      applicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
-      billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
+      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
     }
 
     override fun defineViews(views: ViewSet) {
