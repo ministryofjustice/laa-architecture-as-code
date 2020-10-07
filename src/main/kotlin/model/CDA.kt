@@ -16,7 +16,8 @@ class CDA private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Court Data Adapter", 
-        "The laa-court-data-adaptor system is a web service that connects to LAA systems and to HMCTS Common Platform (CP)"
+        "The laa-court-data-adaptor system is a web service that connects to LAA systems and " +
+          "to HMCTS Common Platform (CP)"
       )
 
       api = system.addContainer(
@@ -28,7 +29,9 @@ class CDA private constructor() {
       }
 
       val db = system.addContainer(
-        "Court Data Adapter Database", "Stores OAuth credentials, metadata and acts a cache for some Common Platform data", "PostgreSQL"
+        "Court Data Adapter Database", 
+        "Stores OAuth credentials, metadata and acts a cache for some Common Platform data", 
+        "PostgreSQL"
       ).apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
@@ -49,7 +52,7 @@ class CDA private constructor() {
     override fun defineRelationships() {
       api.uses(
         CommonPlatform.system,
-        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for", 
+        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
         "REST (w/ mTLS)"
       )
     }
