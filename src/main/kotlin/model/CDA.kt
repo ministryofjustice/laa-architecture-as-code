@@ -8,34 +8,32 @@ import com.structurizr.view.AutomaticLayout
 import com.structurizr.view.ContainerView
 import com.structurizr.view.ViewSet
 
-class VCD private constructor() {
+class CDA private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
-    lateinit var web: Container
+    lateinit var api: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "View Court Data", 
-        "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact " +
-          "with the Courts"
+        "Court Data Adapter", 
+        "The laa-court-data-adaptor system is a web service that connects to LAA systems and to HMCTS Common Platform (CP)"
       )
 
-      web = system.addContainer(
-        "View Court Data UI",
-        "Interface for Application and Billing case workers access the Court's data",
+      api = system.addContainer(
+        "Court Data Adapter API",
+        "An API to allow LAA access Common Platform data",
         "Ruby on Rails"
       ).apply {
-        setUrl("https://github.com/ministryofjustice/laa-court-data-ui")
-        Tags.WEB_BROWSER.addTo(this)
+        setUrl("https://github.com/ministryofjustice/laa-court-data-adaptor")
       }
 
       val db = system.addContainer(
-        "View Court Data Database", "Stores user details for the application", "PostgreSQL"
+        "Court Data Adapter Database", "Stores OAuth credentials, metadata and acts a cache for some Common Platform data", "PostgreSQL"
       ).apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      web.uses(db, "Connects to")
+      api.uses(db, "Connects to")
 
       val sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
@@ -45,26 +43,25 @@ class VCD private constructor() {
         CloudPlatform.elasticache.add(this)
       }
       sidekiq.uses(queue, "Processes queued jobs from")
-      web.uses(queue, "Queues feedback jobs to")
+      api.uses(queue, "Queues jobs to")
     }
 
     override fun defineRelationships() {
-      // user relationships
-      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
-
-      // declare relationships to other systems and other system containers
-      web.uses(CDA.api, "Provides interface to HMCTS Common Platform", "REST")
+      api.uses(
+        CommonPlatform.system,
+        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for", 
+        "REST (w/ mTLS)"
+      )
     }
 
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(system, "vcd-context", null).apply {
+      views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(system, "vcd-container", null).apply {
+      views.createContainerView(system, "cda-container", null).apply {
         addDefaultElements()
         setExternalSoftwareSystemBoundariesVisible(true)
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
