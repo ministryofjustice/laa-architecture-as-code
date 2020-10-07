@@ -29,7 +29,9 @@ class VCD private constructor() {
         Tags.WEB_BROWSER.addTo(this)
       }
 
-      val db = system.addContainer("View Court Data Database", "Stores user details for the application", "PostgreSQL").apply {
+      val db = system.addContainer(
+        "View Court Data Database", "Stores user details for the application", "PostgreSQL"
+      ).apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
