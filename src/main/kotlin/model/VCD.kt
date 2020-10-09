@@ -54,7 +54,11 @@ class VCD private constructor() {
       LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
 
       // declare relationships to other systems and other system containers
-      web.uses(CDA.api, "Provides interface to HMCTS Common Platform", "REST")
+      web.uses(
+        CDA.api, 
+        "Provides interface to HMCTS Common Platform to access Court case and hearing information", 
+        "REST"
+      )
     }
 
     override fun defineViews(views: ViewSet) {
