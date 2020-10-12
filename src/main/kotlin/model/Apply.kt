@@ -61,6 +61,7 @@ class Apply private constructor() {
       web.uses(TrueLayer.system, "Gets applicant bank information from", "REST")
       web.uses(GOVUKNotify.system, "Sends email using", "REST")
       web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
+      web.uses(BankHolidaysAPI.system, "Gets UK bank holiday dates from", "REST")
 
       // user relationships
       LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")

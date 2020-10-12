@@ -26,7 +26,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   CDA,
   CommonPlatform,
   OSPlacesAPI,
-  MAAT
+  MAAT,
+  BankHolidaysAPI
 )
 
 private fun defineModelItems(model: Model) {
