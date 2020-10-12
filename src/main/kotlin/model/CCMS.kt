@@ -30,15 +30,21 @@ class CCMS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-ccms-app-soa")
       }
 
-      val db = system.addContainer("CCMS Database", "Stores all data for CCMS", "Oracle").apply {
+      val ebsDb = system.addContainer(
+        "CCMS EBusiness Suite Database",
+        "Customised EBusiness Suite DB",
+        "Oracle"
+      ).apply {
         Tags.DATABASE.addTo(this)
       }
 
-      providerDetailsAPI.uses(db, "connects to")
+      soa.uses(ebsDb, "connects to")
+      providerDetailsAPI.uses(ebsDb, "connects to")
     }
 
     override fun defineRelationships() {
       // declare relationships to other systems and other system containers
+      soa.uses(Northgate.system, "manages documents in")
     }
 
     override fun defineViews(views: ViewSet) {

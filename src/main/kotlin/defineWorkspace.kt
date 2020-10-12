@@ -15,6 +15,7 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Geckoboard,
   TrueLayer,
   GOVUKNotify,
+  Northgate,
   Portal,
   FALA,
   PostcodesIO,
