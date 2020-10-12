@@ -14,7 +14,7 @@ class CCMS private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "Client Cost Management System",
+        "Client and Cost Management System",
         "Legal aid applications, case management, financials, billing, and more"
       )
 
