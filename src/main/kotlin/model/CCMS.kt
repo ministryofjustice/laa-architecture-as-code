@@ -26,13 +26,13 @@ class CCMS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-ccms-provider-details-api")
       }
 
-      soa = system.addContainer("SOA", "An XML API to E-business Suite", "Oracle SOA Suite").apply {
+      soa = system.addContainer("SOA", "A SOAP API to E-Business Suite", "Oracle SOA Suite").apply {
         setUrl("https://github.com/ministryofjustice/laa-ccms-app-soa")
       }
 
       val ebsDb = system.addContainer(
-        "CCMS EBusiness Suite Database",
-        "Customised EBusiness Suite DB",
+        "CCMS E-Business Suite Database",
+        "Customised E-Business Suite DB",
         "Oracle"
       ).apply {
         Tags.DATABASE.addTo(this)
