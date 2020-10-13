@@ -6,16 +6,16 @@ import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
 import com.structurizr.view.ViewSet
 
-class MAATAPI private constructor() {
+class MAAT private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var api: Container
+    lateinit var db: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "MAAT API",
-        "The laa-maat-court-data-api system is a web service that connects to Legacy LAA systems and " +
-          "Court Data Adapter"
+        "Means Assessment & Administration Tool",
+        "The MAAT system is a collection of applications are used in the application process for Criminal Legal Aid"
       )
 
       api = system.addContainer(
@@ -26,41 +26,40 @@ class MAATAPI private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-maat-court-data-api")
         AWSLegacy.ec2.add(this)
       }
-    }
 
-    override fun defineRelationships() {
-      api.uses(
-        CDA.system,
-        "Sends status updates to and process events from"
-      )
-
-      api.uses(
-        CDA.api,
-        "Posts offence level status events",
-        "REST"
-      )
+      db = system.addContainer(
+        "MAAT DB",
+        "An Oracle Database storing case information from HMCTS and decisions regarding Legal Aid Applications",
+        "Oracle"
+      ).apply {
+        setUrl("https://github.com/ministryofjustice/laa-maat-database")
+        AWSLegacy.rds.add(this)
+      }
 
       api.uses(
-        CDA.sqsQueue,
-        "Processes Events from the queue",
-        "SQS"
-      )
-
-      api.uses(
-        MAATDB.db,
+        db,
         "Accesses and stores Court information",
         "Oracle PL/SQL"
       )
     }
 
+    override fun defineRelationships() {
+      // system relationships
+      api.uses(CDA.system, "Sends status updates to and process events from")
+
+      // container relationships
+      api.uses(CDA.api, "Posts offence level status events", "REST")
+      api.uses(CDA.sqsQueue, "Processes notifications from the queue", "SQS")
+    }
+
     override fun defineViews(views: ViewSet) {
       // declare views here
-      views.createSystemContextView(system, "maat-api-context", null).apply {
+      views.createSystemContextView(system, "maat-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(system, "maat-api-container", null).apply {
+      views.createContainerView(system, "maat-container", null).apply {
         addDefaultElements()
         setExternalSoftwareSystemBoundariesVisible(true)
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

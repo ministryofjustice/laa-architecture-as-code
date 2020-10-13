@@ -48,7 +48,11 @@ class CDA private constructor() {
       sidekiq.uses(queue, "Processes queued jobs from")
       api.uses(queue, "Queues jobs to")
 
-      sqsQueue = system.addContainer("SQS", "Used for Event handling", "SQS").apply {
+      sqsQueue = system.addContainer(
+        "SQS", 
+        "Used for pushing notifications from HMCTS to other LAA systems", 
+        "SQS"
+      ).apply {
         AWSLegacy.sqs.add(this)
       }
 
@@ -63,7 +67,7 @@ class CDA private constructor() {
       )
 
       api.uses(
-        MAATAPI.api,
+        MAAT.api,
         "Uses MAAT API to validate MAAT IDs before sending requests to Common Platform",
         "REST"
       )
