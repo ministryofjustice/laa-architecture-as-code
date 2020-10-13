@@ -14,7 +14,7 @@ class CCMS private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "Client Cost Management System",
+        "Client and Cost Management System",
         "Legal aid applications, case management, financials, billing, and more"
       )
 
@@ -45,6 +45,7 @@ class CCMS private constructor() {
     override fun defineRelationships() {
       // declare relationships to other systems and other system containers
       soa.uses(Northgate.system, "manages documents in")
+      soa.uses(BenefitChecker.system, "validates Universal Credit claimants via", "SOAP")
     }
 
     override fun defineViews(views: ViewSet) {
