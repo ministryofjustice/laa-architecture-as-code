@@ -64,3 +64,13 @@ STRUCTURIZR_WORKSPACE_ID=12345 \
 
 You can view these secrets on the [dashboard](https://structurizr.com/dashboard), after clicking *Show more...* next to
 the desired workspace.
+
+### Linting Kotlin
+
+It's possible and recommended to lint your Kotlin code with `ktlint`.
+
+```sh
+ktlint src/main/kotlin/model/Apply.kt
+```
+
+Add the `-F` argument to attempt to automatically fix any linting errors.
