@@ -67,20 +67,21 @@ class CDA private constructor() {
 
     override fun defineRelationships() {
       api.uses(
-        CommonPlatform.system,
-        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
-        "REST (w/ mTLS)"
-      )
-
-      api.uses(
         MAAT.api,
         "Uses MAAT API to validate MAAT IDs before sending requests to Common Platform",
         "REST"
       )
     }
 
+    override fun defineExternalRelationships() {
+      api.uses(
+        CommonPlatform.system,
+        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
+        "REST (w/ mTLS)"
+      )
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

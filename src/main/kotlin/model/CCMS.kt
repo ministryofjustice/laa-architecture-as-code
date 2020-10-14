@@ -46,13 +46,14 @@ class CCMS private constructor() {
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
-      soa.uses(Northgate.system, "manages documents in")
       soa.uses(BenefitChecker.system, "validates Universal Credit claimants via", "SOAP")
     }
 
+    override fun defineExternalRelationships() {
+      soa.uses(Northgate.system, "manages documents in")
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "ccms-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

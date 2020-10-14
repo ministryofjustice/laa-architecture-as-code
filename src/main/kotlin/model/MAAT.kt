@@ -42,16 +42,15 @@ class MAAT private constructor() {
     }
 
     override fun defineRelationships() {
-      // system relationships
       api.uses(CDA.system, "Sends status updates to and process events from")
-
-      // container relationships
       api.uses(CDA.api, "Posts offence level status events", "REST")
       api.uses(CDA.sqsQueue, "Processes notifications from the queue", "SQS")
     }
 
+    override fun defineExternalRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "maat-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

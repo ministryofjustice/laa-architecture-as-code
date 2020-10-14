@@ -74,16 +74,18 @@ class FALA private constructor() {
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
-      laalaa.uses(PostcodesIO.system, "Looks up postcode latitude and longitude from", "REST")
+      // User relationships
       LegalAidAgencyUsers.citizen.uses(web, "Looks for nearby legal advisers using")
       LegalAidAgencyUsers.provider.uses(web, "Looks for nearby legal advisers for citizens using")
       callCentreOperator.uses(web, "Looks for nearby legal advisers for citizens using")
       managementInformationTeam.uses(web, "Logs in every month and updates legal provider details")
     }
 
+    override fun defineExternalRelationships() {
+      laalaa.uses(PostcodesIO.system, "Looks up postcode latitude and longitude from", "REST")
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "fala-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

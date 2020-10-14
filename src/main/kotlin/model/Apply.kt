@@ -53,22 +53,12 @@ class Apply private constructor() {
     }
 
     override fun defineRelationships() {
-      // system relationships
       web.uses(CCMS.system, "Gets provider details and reference data from and submits application through")
-
-      // container relationships
       web.uses(CCMS.providerDetailsAPI, "Gets provider details from", "REST")
       web.uses(CCMS.soa, "Gets reference data and submits legal aid application through", "SOAP")
       web.uses(CFE.api, "Checks applicant financial eligibility through", "REST")
       web.uses(BenefitChecker.api, "Checks if applicant receives passported benefit through", "SOAP")
       web.uses(Portal.system, "Authenticates users through", "SAML")
-
-      // external container relationships
-      web.uses(Geckoboard.system, "Sends metrics to", "REST")
-      web.uses(TrueLayer.system, "Gets applicant bank information from", "REST")
-      web.uses(GOVUKNotify.system, "Sends email using", "REST")
-      web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
-      web.uses(BankHolidaysAPI.system, "Gets UK bank holiday dates from", "REST")
 
       // user relationships
       LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")
@@ -78,8 +68,15 @@ class Apply private constructor() {
       GOVUKNotify.system.delivers(LegalAidAgencyUsers.citizen, "Sends email to")
     }
 
+    override fun defineExternalRelationships() {
+      web.uses(Geckoboard.system, "Sends metrics to", "REST")
+      web.uses(TrueLayer.system, "Gets applicant bank information from", "REST")
+      web.uses(GOVUKNotify.system, "Sends email using", "REST")
+      web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
+      web.uses(BankHolidaysAPI.system, "Gets UK bank holiday dates from", "REST")
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "apply-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

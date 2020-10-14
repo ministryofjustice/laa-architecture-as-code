@@ -6,9 +6,8 @@ import com.structurizr.view.ViewSet
 interface LAASoftwareSystem {
   fun defineModelEntities(model: Model)
   fun defineInternalContainerRelationships()
-  // fun defineContainerRelationships()
-  // fun defineExternalContainerRelationships()
-  // fun defineUserRelationships()
+  fun defineExternalRelationships()
   fun defineRelationships()
+  // fun defineUserRelationships()
   fun defineViews(views: ViewSet)
 }

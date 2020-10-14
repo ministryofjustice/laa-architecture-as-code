@@ -28,6 +28,9 @@ class LegalAidAgencyUsers private constructor() {
     override fun defineRelationships() {
     }
 
+    override fun defineExternalRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
     }
   }

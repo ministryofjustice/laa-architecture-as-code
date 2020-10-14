@@ -30,11 +30,12 @@ class EligibilityCalculator private constructor() {
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
+    }
+
+    override fun defineExternalRelationships() {
     }
 
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "eligibility-calculator-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

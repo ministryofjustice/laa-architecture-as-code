@@ -29,12 +29,13 @@ class CLA private constructor() {
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
       claPublic.uses(FALA.laalaa, "Performs legal adviser searches through", "REST")
     }
 
+    override fun defineExternalRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "cla-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
