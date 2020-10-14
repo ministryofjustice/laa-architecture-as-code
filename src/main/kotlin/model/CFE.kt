@@ -34,6 +34,9 @@ class CFE private constructor() {
     override fun defineExternalRelationships() {
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "cfe-context", null).apply {
         addDefaultElements()

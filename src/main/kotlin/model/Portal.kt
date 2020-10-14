@@ -24,6 +24,9 @@ class Portal private constructor() {
     override fun defineExternalRelationships() {
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "portal-context", null).apply {
         addDefaultElements()

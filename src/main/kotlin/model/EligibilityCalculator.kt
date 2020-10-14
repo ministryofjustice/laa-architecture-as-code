@@ -23,7 +23,6 @@ class EligibilityCalculator private constructor() {
       ).apply {
         setUrl("https://github.com/ministryofjustice/cla_eligibility_calculator")
       }
-      LegalAidAgencyUsers.provider.uses(web, "Assesses how much legal aid a citizen is eligible for using")
     }
 
     override fun defineInternalContainerRelationships() {
@@ -33,6 +32,10 @@ class EligibilityCalculator private constructor() {
     }
 
     override fun defineExternalRelationships() {
+    }
+
+    override fun defineUserRelationships() {
+      LegalAidAgencyUsers.provider.uses(web, "Assesses how much legal aid a citizen is eligible for using")
     }
 
     override fun defineViews(views: ViewSet) {

@@ -60,13 +60,14 @@ class VCD private constructor() {
         "Provides interface to HMCTS Common Platform to access Court case and hearing information",
         "REST"
       )
-
-      // user relationships
-      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
     }
 
     override fun defineExternalRelationships() {
+    }
+
+    override fun defineUserRelationships() {
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
+      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
     }
 
     override fun defineViews(views: ViewSet) {

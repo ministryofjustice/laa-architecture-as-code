@@ -59,13 +59,6 @@ class Apply private constructor() {
       web.uses(CFE.api, "Checks applicant financial eligibility through", "REST")
       web.uses(BenefitChecker.api, "Checks if applicant receives passported benefit through", "SOAP")
       web.uses(Portal.system, "Authenticates users through", "SAML")
-
-      // user relationships
-      LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")
-      LegalAidAgencyUsers.citizen.uses(TrueLayer.system, "Gives bank access authorisation to")
-      LegalAidAgencyUsers.provider.uses(web, "Fills legal aid application through")
-      LegalAidAgencyUsers.provider.uses(Portal.system, "Provides login credentials through")
-      GOVUKNotify.system.delivers(LegalAidAgencyUsers.citizen, "Sends email to")
     }
 
     override fun defineExternalRelationships() {
@@ -74,6 +67,14 @@ class Apply private constructor() {
       web.uses(GOVUKNotify.system, "Sends email using", "REST")
       web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
       web.uses(BankHolidaysAPI.system, "Gets UK bank holiday dates from", "REST")
+    }
+
+    override fun defineUserRelationships() {
+      LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")
+      LegalAidAgencyUsers.citizen.uses(TrueLayer.system, "Gives bank access authorisation to")
+      LegalAidAgencyUsers.provider.uses(web, "Fills legal aid application through")
+      LegalAidAgencyUsers.provider.uses(Portal.system, "Provides login credentials through")
+      GOVUKNotify.system.delivers(LegalAidAgencyUsers.citizen, "Sends email to")
     }
 
     override fun defineViews(views: ViewSet) {

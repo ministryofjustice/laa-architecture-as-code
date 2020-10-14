@@ -53,6 +53,9 @@ class CCMS private constructor() {
       soa.uses(Northgate.system, "manages documents in")
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "ccms-context", null).apply {
         addDefaultElements()

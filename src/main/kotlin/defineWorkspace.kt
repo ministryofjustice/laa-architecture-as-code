@@ -49,7 +49,12 @@ private fun changeUndefinedLocationsToInternal(model: Model) {
 }
 
 private fun defineRelationships() {
-  MODEL_ITEMS.forEach { it.defineRelationships() }
+  MODEL_ITEMS.forEach {
+    it.defineInternalContainerRelationships()
+    it.defineExternalRelationships()
+    it.defineRelationships()
+    it.defineUserRelationships()
+    }
 }
 
 private fun defineViews(views: ViewSet) {

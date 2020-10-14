@@ -81,6 +81,9 @@ class CDA private constructor() {
       )
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()

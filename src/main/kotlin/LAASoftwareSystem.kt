@@ -8,6 +8,6 @@ interface LAASoftwareSystem {
   fun defineInternalContainerRelationships()
   fun defineExternalRelationships()
   fun defineRelationships()
-  // fun defineUserRelationships()
+  fun defineUserRelationships()
   fun defineViews(views: ViewSet)
 }

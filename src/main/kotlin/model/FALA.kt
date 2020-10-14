@@ -74,15 +74,17 @@ class FALA private constructor() {
     }
 
     override fun defineRelationships() {
-      // User relationships
-      LegalAidAgencyUsers.citizen.uses(web, "Looks for nearby legal advisers using")
-      LegalAidAgencyUsers.provider.uses(web, "Looks for nearby legal advisers for citizens using")
-      callCentreOperator.uses(web, "Looks for nearby legal advisers for citizens using")
-      managementInformationTeam.uses(web, "Logs in every month and updates legal provider details")
     }
 
     override fun defineExternalRelationships() {
       laalaa.uses(PostcodesIO.system, "Looks up postcode latitude and longitude from", "REST")
+    }
+
+    override fun defineUserRelationships() {
+      LegalAidAgencyUsers.citizen.uses(web, "Looks for nearby legal advisers using")
+      LegalAidAgencyUsers.provider.uses(web, "Looks for nearby legal advisers for citizens using")
+      callCentreOperator.uses(web, "Looks for nearby legal advisers for citizens using")
+      managementInformationTeam.uses(web, "Logs in every month and updates legal provider details")
     }
 
     override fun defineViews(views: ViewSet) {

@@ -35,6 +35,9 @@ class CLA private constructor() {
     override fun defineExternalRelationships() {
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "cla-context", null).apply {
         addDefaultElements()

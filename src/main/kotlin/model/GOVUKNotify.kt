@@ -26,6 +26,9 @@ class GOVUKNotify private constructor() {
     override fun defineExternalRelationships() {
     }
 
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
     }
   }
