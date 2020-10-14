@@ -26,6 +26,9 @@ class EligibilityCalculator private constructor() {
       LegalAidAgencyUsers.provider.uses(web, "Assesses how much legal aid a citizen is eligible for using")
     }
 
+    override fun defineInternalContainerRelationships() {
+    }
+
     override fun defineRelationships() {
       // declare relationships to other systems and other system containers
     }

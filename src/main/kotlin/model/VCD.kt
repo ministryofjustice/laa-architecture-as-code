@@ -10,6 +10,9 @@ class VCD private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var web: Container
+    lateinit var db: Container
+    lateinit var sidekiq: Container
+    lateinit var queue: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -28,23 +31,27 @@ class VCD private constructor() {
         CloudPlatform.kubernetes.add(this)
       }
 
-      val db = system.addContainer(
+      db = system.addContainer(
         "View Court Data Database", "Stores user details for the application", "PostgreSQL"
       ).apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      web.uses(db, "Connects to")
 
-      val sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
+      sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
-      val queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
+
+      queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
-      sidekiq.uses(queue, "Processes queued jobs from")
+    }
+
+    override fun defineInternalContainerRelationships() {
+      web.uses(db, "Connects to")
       web.uses(queue, "Queues feedback jobs to")
+      sidekiq.uses(queue, "Processes queued jobs from")
     }
 
     override fun defineRelationships() {
@@ -54,8 +61,8 @@ class VCD private constructor() {
 
       // declare relationships to other systems and other system containers
       web.uses(
-        CDA.api, 
-        "Provides interface to HMCTS Common Platform to access Court case and hearing information", 
+        CDA.api,
+        "Provides interface to HMCTS Common Platform to access Court case and hearing information",
         "REST"
       )
     }

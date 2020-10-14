@@ -11,6 +11,7 @@ class CCMS private constructor() {
     lateinit var system: SoftwareSystem
     lateinit var providerDetailsAPI: Container
     lateinit var soa: Container
+    lateinit var ebsDb: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -30,14 +31,16 @@ class CCMS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-ccms-app-soa")
       }
 
-      val ebsDb = system.addContainer(
+      ebsDb = system.addContainer(
         "CCMS E-Business Suite Database",
         "Customised E-Business Suite DB",
         "Oracle"
       ).apply {
         Tags.DATABASE.addTo(this)
       }
+    }
 
+    override fun defineInternalContainerRelationships() {
       soa.uses(ebsDb, "connects to")
       providerDetailsAPI.uses(ebsDb, "connects to")
     }

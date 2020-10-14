@@ -12,6 +12,9 @@ class FALA private constructor() {
     lateinit var system: SoftwareSystem
     lateinit var web: Container
     lateinit var laalaa: Container
+    lateinit var db: Container
+    lateinit var celery: Container
+    lateinit var queue: Container
     lateinit var callCentreOperator: Person
     lateinit var managementInformationTeam: Person
 
@@ -37,9 +40,8 @@ class FALA private constructor() {
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-legal-adviser-api")
       }
-      web.uses(laalaa, "Performs legal adviser searches through", "REST")
 
-      val db = system.addContainer(
+      db = system.addContainer(
         "Provider address database",
         "Stores provider address details with latitude and longitude coordinates",
         "PostgreSQL with PostGIS")
@@ -47,23 +49,28 @@ class FALA private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      laalaa.uses(db, "connects to")
 
-      val celery = system.addContainer("Celery", "Listens to queued events and processes them", "Celery").apply {
+      celery = system.addContainer("Celery", "Listens to queued events and processes them", "Celery").apply {
         CloudPlatform.kubernetes.add(this)
       }
-      val queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Celery", "Redis").apply {
+
+      queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Celery", "Redis").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
-      celery.uses(queue, "Processes queued postcode lookup jobs from")
-      laalaa.uses(queue, "Queues postcode lookup jobs to")
 
       callCentreOperator = model.addPerson(
         "Call centre operator",
         "Contact centre personnel who signposts members of the public in their legal help queries"
       )
       managementInformationTeam = model.addPerson("Management Information Team")
+    }
+
+    override fun defineInternalContainerRelationships() {
+      web.uses(laalaa, "Performs legal adviser searches through", "REST")
+      laalaa.uses(db, "connects to")
+      laalaa.uses(queue, "Queues postcode lookup jobs to")
+      celery.uses(queue, "Processes queued postcode lookup jobs from")
     }
 
     override fun defineRelationships() {

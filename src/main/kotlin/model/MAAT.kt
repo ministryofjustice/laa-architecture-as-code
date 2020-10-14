@@ -35,12 +35,10 @@ class MAAT private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-maat-database")
         AWSLegacy.rds.add(this)
       }
+    }
 
-      api.uses(
-        db,
-        "Accesses and stores Court information",
-        "Oracle PL/SQL"
-      )
+    override fun defineInternalContainerRelationships() {
+      api.uses(db, "Accesses and stores Court information", "Oracle PL/SQL")
     }
 
     override fun defineRelationships() {
