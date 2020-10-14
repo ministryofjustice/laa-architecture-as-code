@@ -2,10 +2,8 @@ package uk.gov.justice.laa.architecture
 
 import com.structurizr.model.Container
 import com.structurizr.model.Model
-import com.structurizr.model.Person
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
-import com.structurizr.view.ContainerView
 import com.structurizr.view.ViewSet
 
 class VCD private constructor() {
@@ -15,7 +13,7 @@ class VCD private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "View Court Data", 
+        "View Court Data",
         "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact " +
           "with the Courts"
       )
@@ -27,6 +25,7 @@ class VCD private constructor() {
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-court-data-ui")
         Tags.WEB_BROWSER.addTo(this)
+        CloudPlatform.kubernetes.add(this)
       }
 
       val db = system.addContainer(

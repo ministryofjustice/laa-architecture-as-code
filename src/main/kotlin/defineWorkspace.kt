@@ -25,7 +25,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   VCD,
   CDA,
   CommonPlatform,
-  OSPlacesAPI
+  OSPlacesAPI,
+  MAAT
 )
 
 private fun defineModelItems(model: Model) {
@@ -35,6 +36,7 @@ private fun defineModelItems(model: Model) {
 
   AWS.defineDeploymentNodes(model)
   CloudPlatform.defineDeploymentNodes(model)
+  AWSLegacy.defineDeploymentNodes(model)
   MODEL_ITEMS.forEach { it.defineModelEntities(model) }
 }
 
