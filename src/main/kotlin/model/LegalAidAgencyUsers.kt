@@ -16,13 +16,22 @@ class LegalAidAgencyUsers private constructor() {
       provider = model.addPerson("Legal Aid Provider")
 
       crimeApplicationCaseWorker = model.addPerson(
-        "Legal aid crime application case worker", 
+        "Legal aid crime application case worker",
         "Manages applications for criminal legal aid"
       )
-      billingCaseWorker = model.addPerson("Legal aid billing case workers", "Verifies legal aid provider's bills") 
+      billingCaseWorker = model.addPerson("Legal aid billing case workers", "Verifies legal aid provider's bills")
+    }
+
+    override fun defineInternalContainerRelationships() {
     }
 
     override fun defineRelationships() {
+    }
+
+    override fun defineExternalRelationships() {
+    }
+
+    override fun defineUserRelationships() {
     }
 
     override fun defineViews(views: ViewSet) {

@@ -11,6 +11,7 @@ class CCMS private constructor() {
     lateinit var system: SoftwareSystem
     lateinit var providerDetailsAPI: Container
     lateinit var soa: Container
+    lateinit var ebsDb: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -30,26 +31,32 @@ class CCMS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-ccms-app-soa")
       }
 
-      val ebsDb = system.addContainer(
+      ebsDb = system.addContainer(
         "CCMS E-Business Suite Database",
         "Customised E-Business Suite DB",
         "Oracle"
       ).apply {
         Tags.DATABASE.addTo(this)
       }
+    }
 
+    override fun defineInternalContainerRelationships() {
       soa.uses(ebsDb, "connects to")
       providerDetailsAPI.uses(ebsDb, "connects to")
     }
 
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
-      soa.uses(Northgate.system, "manages documents in")
       soa.uses(BenefitChecker.system, "validates Universal Credit claimants via", "SOAP")
     }
 
+    override fun defineExternalRelationships() {
+      soa.uses(Northgate.system, "manages documents in")
+    }
+
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "ccms-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

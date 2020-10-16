@@ -10,6 +10,9 @@ class CDA private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var api: Container
+    lateinit var db: Container
+    lateinit var sidekiq: Container
+    lateinit var queue: Container
     lateinit var sqsQueue: Container
 
     override fun defineModelEntities(model: Model) {
@@ -28,7 +31,7 @@ class CDA private constructor() {
         CloudPlatform.kubernetes.add(this)
       }
 
-      val db = system.addContainer(
+      db = system.addContainer(
         "Court Data Adapter Database",
         "Stores OAuth credentials, metadata and acts a cache for some Common Platform data",
         "PostgreSQL"
@@ -36,36 +39,33 @@ class CDA private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      api.uses(db, "Connects to")
 
-      val sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
+      sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
-      val queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
+
+      queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
-      sidekiq.uses(queue, "Processes queued jobs from")
-      api.uses(queue, "Queues jobs to")
 
       sqsQueue = system.addContainer(
-        "SQS", 
-        "Used for pushing notifications from HMCTS to other LAA systems", 
+        "SQS",
+        "Used for pushing notifications from HMCTS to other LAA systems",
         "SQS"
       ).apply {
         AWSLegacy.sqs.add(this)
       }
+    }
 
+    override fun defineInternalContainerRelationships() {
+      api.uses(db, "Connects to")
       api.uses(sqsQueue, "Adds events to process by other systems")
+      api.uses(queue, "Queues jobs to")
+      sidekiq.uses(queue, "Processes queued jobs from")
     }
 
     override fun defineRelationships() {
-      api.uses(
-        CommonPlatform.system,
-        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
-        "REST (w/ mTLS)"
-      )
-
       api.uses(
         MAAT.api,
         "Uses MAAT API to validate MAAT IDs before sending requests to Common Platform",
@@ -73,8 +73,18 @@ class CDA private constructor() {
       )
     }
 
+    override fun defineExternalRelationships() {
+      api.uses(
+        CommonPlatform.system,
+        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
+        "REST (w/ mTLS)"
+      )
+    }
+
+    override fun defineUserRelationships() {
+    }
+
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

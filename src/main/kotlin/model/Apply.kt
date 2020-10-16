@@ -11,6 +11,9 @@ class Apply private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var web: Container
+    lateinit var db: Container
+    lateinit var sidekiq: Container
+    lateinit var queue: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -28,42 +31,45 @@ class Apply private constructor() {
         Tags.WEB_BROWSER.addTo(this)
       }
 
-      val db = system.addContainer("Apply Database", "Stores applications for legal aid", "PostgreSQL").apply {
+      db = system.addContainer("Apply Database", "Stores applications for legal aid", "PostgreSQL").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      web.uses(db, "Connects to")
 
-      val sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
+      sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
-      val queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
+
+      queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
+    }
+
+    override fun defineInternalContainerRelationships() {
+      web.uses(db, "Connects to")
       sidekiq.uses(queue, "Processes queued jobs from")
       web.uses(queue, "Queues feedback jobs to")
     }
 
     override fun defineRelationships() {
-      // system relationships
       web.uses(CCMS.system, "Gets provider details and reference data from and submits application through")
-
-      // container relationships
       web.uses(CCMS.providerDetailsAPI, "Gets provider details from", "REST")
       web.uses(CCMS.soa, "Gets reference data and submits legal aid application through", "SOAP")
       web.uses(CFE.api, "Checks applicant financial eligibility through", "REST")
       web.uses(BenefitChecker.api, "Checks if applicant receives passported benefit through", "SOAP")
       web.uses(Portal.system, "Authenticates users through", "SAML")
+    }
 
-      // external container relationships
+    override fun defineExternalRelationships() {
       web.uses(Geckoboard.system, "Sends metrics to", "REST")
       web.uses(TrueLayer.system, "Gets applicant bank information from", "REST")
       web.uses(GOVUKNotify.system, "Sends email using", "REST")
       web.uses(OSPlacesAPI.system, "Gets address data from", "REST")
       web.uses(BankHolidaysAPI.system, "Gets UK bank holiday dates from", "REST")
+    }
 
-      // user relationships
+    override fun defineUserRelationships() {
       LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")
       LegalAidAgencyUsers.citizen.uses(TrueLayer.system, "Gives bank access authorisation to")
       LegalAidAgencyUsers.provider.uses(web, "Fills legal aid application through")
@@ -72,7 +78,6 @@ class Apply private constructor() {
     }
 
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "apply-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

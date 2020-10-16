@@ -23,12 +23,19 @@ class BenefitChecker private constructor() {
       }
     }
 
+    override fun defineInternalContainerRelationships() {
+    }
+
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers
+    }
+
+    override fun defineExternalRelationships() {
+    }
+
+    override fun defineUserRelationships() {
     }
 
     override fun defineViews(views: ViewSet) {
-      // declare views here
       views.createSystemContextView(system, "benefit-checker-context", null).apply {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)

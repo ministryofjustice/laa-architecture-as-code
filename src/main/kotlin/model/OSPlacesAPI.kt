@@ -14,12 +14,19 @@ class OSPlacesAPI private constructor() {
       }
     }
 
+    override fun defineInternalContainerRelationships() {
+    }
+
     override fun defineRelationships() {
-      // declare relationships to other systems and other system containers here
+    }
+
+    override fun defineExternalRelationships() {
+    }
+
+    override fun defineUserRelationships() {
     }
 
     override fun defineViews(views: ViewSet) {
-      // declare views here
     }
   }
 }
