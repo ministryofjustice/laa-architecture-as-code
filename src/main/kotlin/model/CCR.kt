@@ -34,7 +34,6 @@ class CCR private constructor() {
         Tags.DATABASE.addTo(this)
         AWSLegacy.rds.add(this)
       }
-      web.uses(db, "Connects to")
     }
 
     override fun defineInternalContainerRelationships() {
