@@ -14,7 +14,7 @@ class CCCD private constructor() {
     lateinit var sqsCCLF: Container
     lateinit var sqsProcessResponse: Container
     lateinit var sns: Container
-    lateinit var queue: Container
+    lateinit var redis: Container
     lateinit var sidekiq: Container
     lateinit var db: Container
     
@@ -41,17 +41,16 @@ class CCCD private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.rds.add(this)
       }
-      web.uses(db, "Connects to")
 
       sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
-      queue = system.addContainer("Queue", "Key-value store used for scheduling jobs via Sidekiq", "Redis").apply {
+      redis = system.addContainer(
+        "In Memory Data Store", "Key-value store used for scheduling jobs via Sidekiq and Caching", "Redis"
+      ).apply {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
-      sidekiq.uses(queue, "Processes queued jobs from")
-      web.uses(queue, "Queues jobs to")
 
       sns = system.addContainer("SNS Filter", "Simple Notification Service", "AWS").apply {
         CloudPlatform.sns.add(this)
@@ -68,10 +67,16 @@ class CCCD private constructor() {
     }
 
     override fun defineInternalContainerRelationships() {
+      web.uses(db, "Connects to")
+      web.uses(redis, "Caches API Calls")
+      web.uses(redis, "Queues jobs to")
       web.uses(sns, "Pushes claim when it has been received")
+      web.uses(sqsProcessResponse, "Processes job to see if claim is successful or not")
+
+      sidekiq.uses(redis, "Processes queued jobs from")
+
       sns.uses(sqsCCR, "Queues job for CCR to process claim")
       sns.uses(sqsCCLF, "Queues job for CCLF to process claim")
-      web.uses(sqsProcessResponse, "Processes job to see if claim is successful or not")
     }
 
     override fun defineRelationships() {
