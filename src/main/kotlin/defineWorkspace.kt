@@ -66,7 +66,7 @@ private fun defineViews(views: ViewSet) {
 }
 
 fun defineWorkspace(): Workspace {
-  val enterprise = Enterprise("Legal Aid Agency Digital")
+  val enterprise = Enterprise("Legal Aid Agency")
   val workspace = Workspace(enterprise.name, "Systems related to the delivery of legal aid")
   workspace.id = 55246
   workspace.model.enterprise = enterprise
