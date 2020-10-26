@@ -12,6 +12,7 @@ class CCMS private constructor() {
     lateinit var providerDetailsAPI: Container
     lateinit var soa: Container
     lateinit var ebsDb: Container
+    lateinit var trainingWebsite: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -38,6 +39,14 @@ class CCMS private constructor() {
       ).apply {
         Tags.DATABASE.addTo(this)
       }
+
+      trainingWebsite = system.addContainer(
+        "CCMS training",
+        "A website with training, guidance and support for external users of CCMS",
+        "Squiz Matrix"
+      ).apply {
+        url = "https://ccmstraining.justice.gov.uk/"
+      }
     }
 
     override fun defineInternalContainerRelationships() {
@@ -54,6 +63,7 @@ class CCMS private constructor() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.provider.uses(trainingWebsite, "Learns how to use CCMS")
     }
 
     override fun defineViews(views: ViewSet) {
