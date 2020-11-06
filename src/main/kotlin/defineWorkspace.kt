@@ -31,7 +31,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   CCCD,
   CCR,
   CCLF,
-  CIS
+  CIS,
+  CWA
 )
 
 private fun defineModelItems(model: Model) {
