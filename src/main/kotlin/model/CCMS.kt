@@ -56,8 +56,8 @@ class CCMS private constructor() {
 
     override fun defineRelationships() {
       soa.uses(BenefitChecker.system, "validates Universal Credit claimants via", "SOAP")
-      soa.uses(CIS.system, "imports invoices approved for payment in CIS")
-      soa.uses(CIS.system, "updates payment status of invoices after payment is made")
+      soa.uses(CIS.system, "imports invoices approved for payment from")
+      soa.uses(CIS.system, "updates status of paid invoices in")
     }
 
     override fun defineExternalRelationships() {

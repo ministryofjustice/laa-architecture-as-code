@@ -10,8 +10,8 @@ class CIS private constructor() {
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "CIS",
-        "Legacy system that has been largely superseded but still performs invoicing services"
+        "Corporate Information System",
+        "CIS is a legacy system that has been largely superseded but still performs invoicing services"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-cis")
       }
