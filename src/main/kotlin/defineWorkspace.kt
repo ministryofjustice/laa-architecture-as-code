@@ -30,7 +30,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   BankHolidaysAPI,
   CCCD,
   CCR,
-  CCLF
+  CCLF,
+  CIS
 )
 
 private fun defineModelItems(model: Model) {
