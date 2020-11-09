@@ -14,6 +14,7 @@ class Apply private constructor() {
     lateinit var db: Container
     lateinit var sidekiq: Container
     lateinit var queue: Container
+    lateinit var clamAV: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -44,12 +45,17 @@ class Apply private constructor() {
         Tags.DATABASE.addTo(this)
         CloudPlatform.elasticache.add(this)
       }
+
+      clamAV = system.addContainer("ClamAV", "Clam AntiVirus virus scanner", "ClamAV").apply {
+        CloudPlatform.kubernetes.add(this)
+      }
     }
 
     override fun defineInternalContainerRelationships() {
       web.uses(db, "Connects to")
       sidekiq.uses(queue, "Processes queued jobs from")
       web.uses(queue, "Queues feedback jobs to")
+      web.uses(clamAV, "Scans attachments with")
     }
 
     override fun defineRelationships() {
