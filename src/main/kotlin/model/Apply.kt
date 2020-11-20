@@ -92,7 +92,7 @@ class Apply private constructor() {
       views.createContainerView(system, "apply-container", null).apply {
         addDefaultElements()
         renderInternalCcmsContainers(this)
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 400, 100)
       }
     }
 
