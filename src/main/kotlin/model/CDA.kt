@@ -87,13 +87,13 @@ class CDA private constructor() {
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 500, 500, 0, false)
       }
 
       views.createContainerView(system, "cda-container", null).apply {
         addDefaultElements()
         setExternalSoftwareSystemBoundariesVisible(true)
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 500, 400, 50, false)
       }
     }
   }
