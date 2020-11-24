@@ -31,15 +31,6 @@ class CDA private constructor() {
         CloudPlatform.kubernetes.add(this)
       }
 
-      db = system.addContainer(
-        "Court Data Adapter Database",
-        "Stores OAuth credentials, metadata and acts a cache for some Common Platform data",
-        "PostgreSQL"
-      ).apply {
-        Tags.DATABASE.addTo(this)
-        CloudPlatform.rds.add(this)
-      }
-
       sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
@@ -55,6 +46,15 @@ class CDA private constructor() {
         "SQS"
       ).apply {
         AWSLegacy.sqs.add(this)
+      }
+
+      db = system.addContainer(
+        "Court Data Adapter Database",
+        "Stores OAuth credentials, metadata and acts a cache for some Common Platform data",
+        "PostgreSQL"
+      ).apply {
+        Tags.DATABASE.addTo(this)
+        CloudPlatform.rds.add(this)
       }
     }
 
