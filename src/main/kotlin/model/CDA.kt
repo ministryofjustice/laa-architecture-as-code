@@ -76,7 +76,7 @@ class CDA private constructor() {
     override fun defineExternalRelationships() {
       api.uses(
         CommonPlatform.system,
-        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
+        "Uses APIs to search & retreive case information, marks cases to receive notifications\n",
         "REST (w/ mTLS)"
       )
     }
