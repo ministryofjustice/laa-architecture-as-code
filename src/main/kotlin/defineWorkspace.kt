@@ -33,7 +33,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   CCLF,
   CIS,
   CWA,
-  SendGrid
+  SendGrid,
+  TAD
 )
 
 private fun defineModelItems(model: Model) {
