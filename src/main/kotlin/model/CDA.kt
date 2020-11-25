@@ -31,15 +31,6 @@ class CDA private constructor() {
         CloudPlatform.kubernetes.add(this)
       }
 
-      db = system.addContainer(
-        "Court Data Adapter Database",
-        "Stores OAuth credentials, metadata and acts a cache for some Common Platform data",
-        "PostgreSQL"
-      ).apply {
-        Tags.DATABASE.addTo(this)
-        CloudPlatform.rds.add(this)
-      }
-
       sidekiq = system.addContainer("Sidekiq", "Listens to queued events and processes them", "Sidekiq").apply {
         CloudPlatform.kubernetes.add(this)
       }
@@ -55,6 +46,15 @@ class CDA private constructor() {
         "SQS"
       ).apply {
         AWSLegacy.sqs.add(this)
+      }
+
+      db = system.addContainer(
+        "Court Data Adapter Database",
+        "Stores OAuth credentials, metadata and acts a cache for some Common Platform data",
+        "PostgreSQL"
+      ).apply {
+        Tags.DATABASE.addTo(this)
+        CloudPlatform.rds.add(this)
       }
     }
 
@@ -76,7 +76,7 @@ class CDA private constructor() {
     override fun defineExternalRelationships() {
       api.uses(
         CommonPlatform.system,
-        "Uses APIs to search and retreive case information and mark cases that LAA want to receive notifications for",
+        "Uses APIs to search & retreive case information, marks cases to receive notifications\n",
         "REST (w/ mTLS)"
       )
     }
@@ -87,13 +87,13 @@ class CDA private constructor() {
     override fun defineViews(views: ViewSet) {
       views.createSystemContextView(system, "cda-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 500, 500, 0, false)
       }
 
       views.createContainerView(system, "cda-container", null).apply {
         addDefaultElements()
         setExternalSoftwareSystemBoundariesVisible(true)
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 500, 400, 50, false)
       }
     }
   }
