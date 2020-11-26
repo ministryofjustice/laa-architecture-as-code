@@ -11,6 +11,8 @@ class LegalAidAgencyUsers private constructor() {
     lateinit var provider: Person
     lateinit var crimeApplicationCaseWorker: Person
     lateinit var billingCaseWorker: Person
+    lateinit var directServicesTeam: Person
+    lateinit var contactCentreOperator: Person
 
     override fun defineModelEntities(model: Model) {
       citizen = model.addPerson(Location.External, "A member of the public in England and Wales", null)
@@ -21,10 +23,23 @@ class LegalAidAgencyUsers private constructor() {
         "Legal aid crime application case worker",
         "Manages applications for criminal legal aid"
       )
+
       billingCaseWorker = model.addPerson(
         Location.Internal,
         "Legal aid billing case workers",
         "Verifies legal aid provider's bills"
+      )
+
+      directServicesTeam = model.addPerson(
+        Location.Internal,
+        "Direct Services Team",
+        "Maintains the Civil Legal Aid operator relationship and performance"
+      )
+
+      contactCentreOperator = model.addPerson(
+        Location.Internal,
+        "Contact Centre Operator",
+        "Contact centre personell who signposts members of the public in their legal help queries"
       )
     }
 
