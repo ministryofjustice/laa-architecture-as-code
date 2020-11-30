@@ -12,6 +12,8 @@ class CCMS private constructor() {
     lateinit var providerDetailsAPI: Container
     lateinit var soa: Container
     lateinit var ebsDb: Container
+    lateinit var providerUserInterface: Container
+    lateinit var temporaryDataStore: Container
     lateinit var trainingWebsite: Container
 
     override fun defineModelEntities(model: Model) {
@@ -26,6 +28,22 @@ class CCMS private constructor() {
         "Java"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-ccms-provider-details-api")
+      }
+
+      providerUserInterface = system.addContainer(
+        "Provider User Interface",
+        "Service that providers use to submit civil legal aid applications, and bills",
+        "Java"
+      ).apply {
+        setUrl("https://github.com/ministryofjustice/laa-ccms-pui")
+      }
+
+      temporaryDataStore = system.addContainer(
+        "Temporary Data Store",
+        "Stores incomplete applications",
+        "Oracle"
+      ).apply {
+        Tags.DATABASE.addTo(this)
       }
 
       soa = system.addContainer("SOA", "A SOAP API to E-Business Suite", "Oracle SOA Suite").apply {
@@ -61,6 +79,12 @@ class CCMS private constructor() {
         CIS.system,
         "Imports CIS invoices approved for payment and, after payment, updates status of invoices in CIS"
       )
+
+      providerUserInterface.uses(temporaryDataStore, "Reads and writes data to")
+      providerUserInterface.uses(soa, "Reads and writes applications to", "SOAP")
+
+      temporaryDataStore.uses(ebsDb, "Reads data from", "Shared database")
+
       soa.uses(CWA.system, "Synchronises user, provider and bank account data with")
       providerDetailsAPI.uses(CWA.system, "Looks up contract data from")
     }
@@ -71,6 +95,7 @@ class CCMS private constructor() {
 
     override fun defineUserRelationships() {
       LegalAidAgencyUsers.provider.uses(trainingWebsite, "Learns how to use CCMS")
+      LegalAidAgencyUsers.provider.uses(providerUserInterface, "Completes applications")
     }
 
     override fun defineViews(views: ViewSet) {
