@@ -86,6 +86,11 @@ class CCMS private constructor() {
       temporaryDataStore.uses(ebsDb, "Reads data from", "Shared database")
 
       soa.uses(CWA.system, "Synchronises user, provider and bank account data with")
+      soa.uses(
+        CorporateDocumentServices.system,
+        "Transfers a nightly ZIP of PDF correspondence, and XML manifest, to be printed and posted",
+        "FTP"
+      )
       providerDetailsAPI.uses(CWA.system, "Looks up contract data from")
     }
 
