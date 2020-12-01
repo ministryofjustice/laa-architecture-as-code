@@ -70,32 +70,25 @@ class CCMS private constructor() {
     override fun defineInternalContainerRelationships() {
       soa.uses(ebsDb, "Connects to")
       providerDetailsAPI.uses(ebsDb, "Connects to")
-    }
-
-    override fun defineRelationships() {
-      system.uses(CWA.system, "Gets contract data from CWA and synchronises updates each night")
-      soa.uses(BenefitChecker.system, "Validates Universal Credit claimants via", "SOAP")
-      soa.uses(
-        CIS.system,
-        "Imports CIS invoices approved for payment and, after payment, updates status of invoices in CIS"
-      )
 
       providerUserInterface.uses(temporaryDataStore, "Reads and writes data to")
       providerUserInterface.uses(soa, "Reads and writes applications to", "SOAP")
 
       temporaryDataStore.uses(ebsDb, "Reads data from", "Shared database")
+    }
 
-      soa.uses(CWA.system, "Synchronises user, provider and bank account data with")
+    override fun defineRelationships() {
+      soa.uses(CWA.db, "Looks up provider contracts", "JDBC")
+      soa.uses(BenefitChecker.system, "Validates Universal Credit claimants via", "SOAP")
+    }
+
+    override fun defineExternalRelationships() {
       soa.uses(
         CorporateDocumentServices.system,
         "Transfers a nightly ZIP of PDF correspondence, and XML manifest, to be printed and posted",
         "FTP"
       )
-      providerDetailsAPI.uses(CWA.system, "Looks up contract data from")
-    }
-
-    override fun defineExternalRelationships() {
-      soa.uses(Northgate.system, "Manages documents in")
+      soa.uses(Northgate.system, "Manages documents in", "SOAP")
     }
 
     override fun defineUserRelationships() {

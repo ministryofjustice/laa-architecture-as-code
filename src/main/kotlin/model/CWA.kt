@@ -1,6 +1,7 @@
 package uk.gov.justice.laa.architecture
 
 import com.structurizr.model.Container
+import com.structurizr.model.InteractionStyle
 import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
@@ -43,6 +44,13 @@ class CWA private constructor() {
     }
 
     override fun defineExternalRelationships() {
+      db.uses(
+        CCMS.ebsDb,
+        "Pushes internal users, their roles and securing attributes. "+
+          "Provider users, bank accounts, contracts and office details. Synchronises each night",
+        "HUB",
+        InteractionStyle.Asynchronous
+      )
     }
 
     override fun defineUserRelationships() {

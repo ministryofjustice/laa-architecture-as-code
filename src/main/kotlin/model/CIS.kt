@@ -1,5 +1,6 @@
 package uk.gov.justice.laa.architecture
 
+import com.structurizr.model.InteractionStyle
 import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ViewSet
@@ -24,6 +25,13 @@ class CIS private constructor() {
     }
 
     override fun defineExternalRelationships() {
+      // TODO: This should be the CIS DB component, not the CIS system
+      system.uses(
+        CCMS.ebsDb,
+        "Pushes CIS invoices approved for payment and, after payment, updates status of invoices in CIS",
+        "HUB",
+        InteractionStyle.Asynchronous
+      )
     }
 
     override fun defineUserRelationships() {
