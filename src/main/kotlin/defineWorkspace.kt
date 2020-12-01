@@ -35,7 +35,10 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   CWA,
   SendGrid,
   TAD,
-  CorporateDocumentServices
+  CorporateDocumentServices,
+  MLRA,
+  Libra,
+  InfoX
 )
 
 private fun defineModelItems(model: Model) {
