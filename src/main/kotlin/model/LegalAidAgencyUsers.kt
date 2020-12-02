@@ -20,19 +20,28 @@ class LegalAidAgencyUsers private constructor() {
       citizen = model.addPerson(Location.External, "A member of the public in England and Wales", null)
       provider = model.addPerson(Location.External, "Legal Aid Provider", null)
 
-      meansCaseWorker = model.addPerson(Location.Internal, "Legal Aid means case worker", null)
-      meritsCaseWorker = model.addPerson(Location.Internal, "Legal Aid merits case worker", null)
-
       crimeApplicationCaseWorker = model.addPerson(
         Location.Internal,
-        "Legal Aid crime application case worker",
-        "Manages applications for criminal legal aid"
+        "Crime application caseworker",
+        "A caseworker who manages applications for criminal legal aid"
       )
 
       billingCaseWorker = model.addPerson(
         Location.Internal,
-        "Legal Aid billing case worker",
-        "Verifies legal aid provider's bills"
+        "Billing caseworker",
+        "A caseworker who verifies legal aid provider's bills"
+      )
+
+      meansCaseWorker = model.addPerson(
+        Location.Internal,
+        "Means caseworker",
+        "A caseworker who assesses legal aid applications for means"
+      )
+
+      meritsCaseWorker = model.addPerson(
+        Location.Internal,
+        "Merits caseworker",
+        "A caseworker who assesses legal aid applications for merits"
       )
 
       directServicesTeam = model.addPerson(
@@ -44,7 +53,7 @@ class LegalAidAgencyUsers private constructor() {
       contactCentreOperator = model.addPerson(
         Location.Internal,
         "Contact Centre Operator",
-        "Contact centre personell who signposts members of the public in their legal help queries"
+        "Contact centre personel who signposts members of the public in their legal help queries"
       )
     }
 
