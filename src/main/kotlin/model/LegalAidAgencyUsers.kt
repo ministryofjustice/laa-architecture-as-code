@@ -11,6 +11,8 @@ class LegalAidAgencyUsers private constructor() {
     lateinit var provider: Person
     lateinit var crimeApplicationCaseWorker: Person
     lateinit var billingCaseWorker: Person
+    lateinit var meansCaseWorker: Person
+    lateinit var meritsCaseWorker: Person
     lateinit var directServicesTeam: Person
     lateinit var contactCentreOperator: Person
 
@@ -20,14 +22,26 @@ class LegalAidAgencyUsers private constructor() {
 
       crimeApplicationCaseWorker = model.addPerson(
         Location.Internal,
-        "Legal aid crime application case worker",
-        "Manages applications for criminal legal aid"
+        "Crime application caseworker",
+        "A caseworker who manages applications for criminal legal aid"
       )
 
       billingCaseWorker = model.addPerson(
         Location.Internal,
-        "Legal aid billing case workers",
-        "Verifies legal aid provider's bills"
+        "Billing caseworker",
+        "A caseworker who verifies legal aid provider's bills"
+      )
+
+      meansCaseWorker = model.addPerson(
+        Location.Internal,
+        "Means caseworker",
+        "A caseworker who assesses legal aid applications for means"
+      )
+
+      meritsCaseWorker = model.addPerson(
+        Location.Internal,
+        "Merits caseworker",
+        "A caseworker who assesses legal aid applications for merits"
       )
 
       directServicesTeam = model.addPerson(
@@ -39,7 +53,7 @@ class LegalAidAgencyUsers private constructor() {
       contactCentreOperator = model.addPerson(
         Location.Internal,
         "Contact Centre Operator",
-        "Contact centre personell who signposts members of the public in their legal help queries"
+        "Contact centre personel who signposts members of the public in their legal help queries"
       )
     }
 
