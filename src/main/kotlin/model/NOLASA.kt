@@ -16,7 +16,9 @@ class NOLASA private constructor() {
         "Not On Libra Auto-Search Application",
         "Is a micro-service that reads cases that have been marked as 'not-on-libra' from the MLRA " +
           "database once a day and auto-searches the HMCTS Libra system"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       app = system.addContainer(
         "NOLASA",
@@ -32,8 +34,20 @@ class NOLASA private constructor() {
     }
 
     override fun defineRelationships() {
-      app.uses(MAAT.db, "Uses as its own Database")
-      app.uses(InfoX.app, "Searches for cases")
+      app.uses(
+        MAAT.db,
+        "Uses as its own Database",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      app.uses(
+        InfoX.app,
+        "Searches for cases",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

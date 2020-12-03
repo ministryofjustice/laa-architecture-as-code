@@ -3,6 +3,7 @@ package uk.gov.justice.laa.architecture
 import com.structurizr.model.Element
 
 enum class Tags : addTo {
+  CRIME,
   DATABASE,
   WEB_BROWSER,
   PROVIDER {

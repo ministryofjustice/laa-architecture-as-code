@@ -15,7 +15,9 @@ class MLRA private constructor() {
       system = model.addSoftwareSystem(
         "MAAT Libra Interface Application",
         "The MLRA system provides an interface between MAAT and HMCTS's LIBRA application for Caseworkers"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       web = system.addContainer(
         "MLRA UI",
@@ -32,8 +34,20 @@ class MLRA private constructor() {
     }
 
     override fun defineRelationships() {
-      web.uses(MAAT.db, "Uses as its own Database")
-      web.uses(InfoX.app, "Searches cases and sends representation order status")
+      web.uses(
+        MAAT.db,
+        "Uses as its own Database",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      web.uses(
+        InfoX.app,
+        "Searches cases and sends representation order status",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
