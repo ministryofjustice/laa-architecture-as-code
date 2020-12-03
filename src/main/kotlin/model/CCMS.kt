@@ -16,6 +16,8 @@ class CCMS private constructor() {
     lateinit var providerUserInterface: Container
     lateinit var temporaryDataStore: Container
     lateinit var trainingWebsite: Container
+    lateinit var opaWebDeterminations: Container
+    lateinit var connector: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -72,14 +74,35 @@ class CCMS private constructor() {
       ).apply {
         url = "https://ccmstraining.justice.gov.uk/"
       }
+
+      opaWebDeterminations = system.addContainer(
+        "Oracle Web Determinations",
+        "Dynamically generates interview questions based on business rules",
+        "Oracle Policy Automation"
+      ).apply {
+        url = "https://github.com/ministryofjustice/laa-ccms-opa-policy-models"
+      }
+
+      connector = system.addContainer(
+        "Connector",
+        "Web Determinations data adaptor plugin",
+        "Java"
+      ).apply {
+        url = "https://github.com/ministryofjustice/laa-ccms-pui"
+      }
     }
 
     override fun defineInternalContainerRelationships() {
       soa.uses(ebsDb, "Connects to")
       providerDetailsAPI.uses(ebsDb, "Connects to")
 
+      connector.uses(temporaryDataStore, "Reads and writes data to")
+
+      opaWebDeterminations.uses(connector, "Reads and writes applications to")
+
       providerUserInterface.uses(temporaryDataStore, "Reads and writes data to")
       providerUserInterface.uses(soa, "Reads and writes applications to", "SOAP")
+      providerUserInterface.uses(opaWebDeterminations, "Serves forms", "SOAP")
 
       oracleForms.uses(ebsDb, "Reads and writes data to")
 
