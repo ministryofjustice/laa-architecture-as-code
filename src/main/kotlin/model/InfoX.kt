@@ -19,7 +19,7 @@ class InfoX private constructor() {
 
       app = system.addContainer(
         "InfoX",
-        "SOAP/MAAT interface application",
+        "Adapter for the LAA MLRA/MAAT and HMCTS Libra communication",
         "Java"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-infoX-application")

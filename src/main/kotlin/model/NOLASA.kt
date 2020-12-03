@@ -32,7 +32,7 @@ class NOLASA private constructor() {
     }
 
     override fun defineRelationships() {
-      app.uses(MAAT.db, "Uses as it's own Database")
+      app.uses(MAAT.db, "Uses as its own Database")
       app.uses(InfoX.app, "Searches for cases")
     }
 

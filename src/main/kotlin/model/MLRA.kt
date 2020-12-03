@@ -14,7 +14,7 @@ class MLRA private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "MAAT Libra Interface Application",
-        "The MLRA systems provides an interface between MAAT and HMCTS's LIBRA application for Caseworkers"
+        "The MLRA system provides an interface between MAAT and HMCTS's LIBRA application for Caseworkers"
       )
 
       web = system.addContainer(
@@ -24,6 +24,7 @@ class MLRA private constructor() {
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-mlra-application")
         AWSLegacy.ec2.add(this)
+        Tags.WEB_BROWSER.addTo(this)
       }
     }
 
@@ -31,7 +32,7 @@ class MLRA private constructor() {
     }
 
     override fun defineRelationships() {
-      web.uses(MAAT.db, "Uses as it's own Database")
+      web.uses(MAAT.db, "Uses as its own Database")
       web.uses(InfoX.app, "Searches cases and sends representation order status")
     }
 
