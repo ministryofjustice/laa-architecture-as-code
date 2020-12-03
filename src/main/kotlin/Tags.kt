@@ -17,3 +17,10 @@ enum class Tags : addTo {
     element.addTags(this.toString())
   }
 }
+
+fun tagsToArgument(vararg tags: Tags):Array<String> {
+  val stringedTags =  arrayListOf<String>()
+  tags.forEach { stringedTags.add(it.toString()) }
+
+  return stringedTags.toTypedArray()
+}
