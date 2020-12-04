@@ -20,7 +20,9 @@ class CDA private constructor() {
         "Court Data Adapter",
         "The laa-court-data-adaptor system is a web service that connects to LAA systems and " +
           "to HMCTS Common Platform (CP)"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       api = system.addContainer(
         "Court Data Adapter API",
@@ -69,7 +71,9 @@ class CDA private constructor() {
       api.uses(
         MAAT.api,
         "Uses MAAT API to validate MAAT IDs before sending requests to Common Platform",
-        "REST"
+        "REST",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
     }
 
@@ -77,7 +81,9 @@ class CDA private constructor() {
       api.uses(
         CommonPlatform.system,
         "Uses APIs to search & retreive case information, marks cases to receive notifications\n",
-        "REST (w/ mTLS)"
+        "REST (w/ mTLS)",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
     }
 

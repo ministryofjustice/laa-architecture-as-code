@@ -3,6 +3,7 @@ package uk.gov.justice.laa.architecture
 import com.structurizr.model.Element
 
 enum class Tags : addTo {
+  CRIME,
   DATABASE,
   WEB_BROWSER,
   PROVIDER {
@@ -16,4 +17,11 @@ enum class Tags : addTo {
   override fun addTo(element: Element) {
     element.addTags(this.toString())
   }
+}
+
+fun tagsToArgument(vararg tags: Tags):Array<String> {
+  val stringedTags =  arrayListOf<String>()
+  tags.forEach { stringedTags.add(it.toString()) }
+
+  return stringedTags.toTypedArray()
 }

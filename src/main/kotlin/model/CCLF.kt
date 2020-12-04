@@ -16,7 +16,9 @@ class CCLF private constructor() {
       system = model.addSoftwareSystem(
         "Crown Court Litigator Fees",
         "The CCLF system is a web service that manages litigators fee claims."
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       web = system.addContainer(
         "Crown Court Litigator Fees UI",
@@ -41,8 +43,10 @@ class CCLF private constructor() {
     }
 
     override fun defineRelationships() {
-      web.uses(CCCD.system, "Gets Claims information from and sends claim decision")
-      
+      web.uses(
+        CCCD.system, "Gets Claims information from and sends claim decision", null, null, tagsToArgument(Tags.CRIME)
+      )
+
       web.uses(CCCD.sqsCCLF, "Processes job to know to pull claim information")
       web.uses(CCCD.sqsProcessResponse, "Notifies CCCD of success/failure of claim")
       web.uses(CCCD.web, "Pulls claims from", "HTTP API")
@@ -52,7 +56,9 @@ class CCLF private constructor() {
     }
 
     override fun defineUserRelationships() {
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Processes claim accessments for Litigators fees (LGFS)")
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        web, "Processes claim accessments for Litigators fees (LGFS)", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

@@ -25,6 +25,7 @@ class LegalAidAgencyUsers private constructor() {
         "Crime application caseworker",
         "A caseworker who manages applications for criminal legal aid"
       )
+      crimeApplicationCaseWorker.addTags(Tags.CRIME.toString())
 
       billingCaseWorker = model.addPerson(
         Location.Internal,
@@ -43,6 +44,7 @@ class LegalAidAgencyUsers private constructor() {
         "Merits caseworker",
         "A caseworker who assesses legal aid applications for merits"
       )
+      billingCaseWorker.addTags(Tags.CRIME.toString())
 
       directServicesTeam = model.addPerson(
         Location.Internal,

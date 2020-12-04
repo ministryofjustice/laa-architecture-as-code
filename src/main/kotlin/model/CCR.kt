@@ -16,7 +16,9 @@ class CCR private constructor() {
       system = model.addSoftwareSystem(
         "Crown Court Remuneration",
         "The CCR system is a web service that Manages Advocate fee claims."
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       web = system.addContainer(
         "Crown Court Remuneration UI",
@@ -41,18 +43,44 @@ class CCR private constructor() {
     }
 
     override fun defineRelationships() {
-      web.uses(CCCD.system, "Gets Claims information from and sends claim decision")
+      web.uses(
+        CCCD.system,
+        "Gets Claims information from and sends claim decision",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
 
-      web.uses(CCCD.sqsCCR, "Processes job to know to pull claim information")
-      web.uses(CCCD.sqsProcessResponse, "Notifies CCCD of success/failure of claim")
-      web.uses(CCCD.web, "Pulls claims from", "HTTP API")
+      web.uses(
+        CCCD.sqsCCR,
+        "Processes job to know to pull claim information",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      web.uses(
+        CCCD.sqsProcessResponse,
+        "Notifies CCCD of success/failure of claim",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      web.uses(
+        CCCD.web,
+        "Pulls claims from",
+        "HTTP API",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
     }
 
     override fun defineUserRelationships() {
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Processes claim accessments for Advocate fees (AGFS)")
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        web, "Processes claim accessments for Advocate fees (AGFS)", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

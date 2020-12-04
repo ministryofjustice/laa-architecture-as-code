@@ -41,6 +41,10 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   InfoX
 )
 
+private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(
+  Tags.CRIME
+)
+
 private fun defineModelItems(model: Model) {
   model.setImpliedRelationshipsStrategy(
     CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy()
@@ -86,6 +90,7 @@ fun defineWorkspace(): Workspace {
   defineViews(workspace.views)
   defineStyles(workspace.views.configuration.styles)
   defineDocumentation(workspace)
+  defineFilteredViews(TAGS_FOR_FILTER_VIEWS, workspace.views)
 
   return workspace
 }

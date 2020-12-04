@@ -14,6 +14,7 @@ class CommonPlatform private constructor() {
         "Contains information about Court Cases in Magistrates and Crown Courts"
       ).apply {
         OutsideLAA.addTo(this)
+        Tags.CRIME.addTo(this)
       }
     }
 
@@ -21,7 +22,13 @@ class CommonPlatform private constructor() {
     }
 
     override fun defineRelationships() {
-      system.uses(CDA.api, "Provides notifications when Hearings have resulted", "REST (w/ mTLS)")
+      system.uses(
+        CDA.api,
+        "Provides notifications when Hearings have resulted",
+        "REST (w/ mTLS)",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

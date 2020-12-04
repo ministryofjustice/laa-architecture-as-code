@@ -16,7 +16,9 @@ class MAAT private constructor() {
       system = model.addSoftwareSystem(
         "Means Assessment & Administration Tool",
         "The MAAT system is a collection of applications are used in the application process for Criminal Legal Aid"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       api = system.addContainer(
         "MAAT API",
@@ -42,9 +44,27 @@ class MAAT private constructor() {
     }
 
     override fun defineRelationships() {
-      api.uses(CDA.system, "Sends status updates to and process events from")
-      api.uses(CDA.api, "Posts offence level status events", "REST")
-      api.uses(CDA.sqsQueue, "Processes notifications from the queue", "SQS")
+      api.uses(
+        CDA.system,
+        "Sends status updates to and process events from",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      api.uses(
+        CDA.api,
+        "Posts offence level status events",
+        "REST",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      api.uses(
+        CDA.sqsQueue,
+        "Processes notifications from the queue",
+        "SQS",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

@@ -17,13 +17,15 @@ class CCCD private constructor() {
     lateinit var redis: Container
     lateinit var sidekiq: Container
     lateinit var db: Container
-    
+
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Claim for crown court defence",
         "Service for the remunerating of advocates and litigators by the Legal Aid Agency for work " +
           "done on behalf of defendants in criminal proceedings."
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       web = system.addContainer(
         "Claim for crown court defence UI",
@@ -63,7 +65,7 @@ class CCCD private constructor() {
       }
       sqsProcessResponse = system.addContainer("SQS Response", "Simple Queue Service", "AWS").apply {
         CloudPlatform.sqs.add(this)
-      }      
+      }
     }
 
     override fun defineInternalContainerRelationships() {
@@ -86,8 +88,12 @@ class CCCD private constructor() {
     }
 
     override fun defineUserRelationships() {
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Starts a claim assessment")
-      LegalAidAgencyUsers.provider.uses(web, "Submits a claim")
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        web, "Starts a claim assessment", null, null, tagsToArgument(Tags.CRIME)
+      )
+      LegalAidAgencyUsers.provider.uses(
+        web, "Submits a claim", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

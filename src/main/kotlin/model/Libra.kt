@@ -14,6 +14,7 @@ class Libra private constructor() {
         "Legacy application that contains information about Court Cases in Magistrates Courts"
       ).apply {
         OutsideLAA.addTo(this)
+        Tags.CRIME.addTo(this)
       }
     }
 
@@ -21,7 +22,13 @@ class Libra private constructor() {
     }
 
     override fun defineRelationships() {
-      system.uses(InfoX.app, "Provides notifications when Hearings have resulted", "SOAP")
+      system.uses(
+        InfoX.app,
+        "Provides notifications when Hearings have resulted",
+        "SOAP",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

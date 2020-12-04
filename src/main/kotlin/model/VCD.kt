@@ -19,7 +19,9 @@ class VCD private constructor() {
         "View Court Data",
         "The laa-court-data-ui system is a web service that Application and Billing case workers use to interact " +
           "with the Courts"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       web = system.addContainer(
         "View Court Data UI",
@@ -58,7 +60,9 @@ class VCD private constructor() {
       web.uses(
         CDA.api,
         "Provides interface to HMCTS Common Platform to access Court case and hearing information",
-        "REST"
+        "REST",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
     }
 
@@ -66,8 +70,12 @@ class VCD private constructor() {
     }
 
     override fun defineUserRelationships() {
-      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(web, "Searches and links/unlinks defendants to MAAT")
-      LegalAidAgencyUsers.billingCaseWorker.uses(web, "Searches and inspects defendants' case hearing history")
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(
+        web, "Searches and links/unlinks defendants to MAAT", null, null, tagsToArgument(Tags.CRIME)
+      )
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        web, "Searches and inspects defendants' case hearing history", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

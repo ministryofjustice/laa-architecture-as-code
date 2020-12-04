@@ -15,7 +15,9 @@ class InfoX private constructor() {
       system = model.addSoftwareSystem(
         "InfoX",
         "Adapter for LAA to HMCTS's Libra"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       app = system.addContainer(
         "InfoX",
@@ -31,8 +33,12 @@ class InfoX private constructor() {
     }
 
     override fun defineRelationships() {
-      app.uses(Libra.system, "Sends representation orders status", "SOAP")
-      app.uses(MAAT.db, "Writes notifications to")
+      app.uses(
+        Libra.system, "Sends representation orders status", "SOAP", null, tagsToArgument(Tags.CRIME)
+      )
+      app.uses(
+        MAAT.db, "Writes notifications to", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
