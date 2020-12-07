@@ -52,6 +52,8 @@ class CWA private constructor() {
         "HUB",
         InteractionStyle.Asynchronous
       )
+
+      db.uses(MAAT.db, "Pushes provider names and office addresses to", "HUB")
     }
 
     override fun defineUserRelationships() {
