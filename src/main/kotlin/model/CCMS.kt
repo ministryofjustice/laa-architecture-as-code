@@ -121,6 +121,18 @@ class CCMS private constructor() {
         "FTP"
       )
       soa.uses(Northgate.system, "Manages documents in", "SOAP")
+
+      soa.uses(
+        Rossendales.system,
+        "Pushes customer invoice debt details for collection. (AKA MOD323)",
+        "FTP"
+      )
+
+      soa.uses(
+        Rossendales.system,
+        "Pulls debt acknowledgements, payments collected, and debts closed. (AKA MOD502)",
+        "FTP"
+      )
     }
 
     override fun defineUserRelationships() {

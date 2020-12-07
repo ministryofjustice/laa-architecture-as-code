@@ -40,7 +40,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Libra,
   InfoX,
   ERIC,
-  EDW
+  EDW,
+  Rossendales
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(
