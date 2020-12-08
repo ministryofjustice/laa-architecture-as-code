@@ -133,6 +133,8 @@ class CCMS private constructor() {
         "Pulls debt acknowledgements, payments collected, and debts closed. (AKA MOD502)",
         "FTP"
       )
+
+      usesAllpay()
     }
 
     override fun defineUserRelationships() {
@@ -153,6 +155,26 @@ class CCMS private constructor() {
         addDefaultElements()
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
+    }
+
+    private fun usesAllpay() {
+      system.uses(
+        Allpay.system,
+        "Pushes Direct Debit mandate instructions",
+        "FTP"
+      )
+
+      soa.uses(
+        Allpay.system,
+        "Pushes Direct Debit mandate instructions (AKA MOD333)",
+        "FTP"
+      )
+
+      soa.uses(
+        Allpay.system,
+        "Pulls mandate confirmations, and any bank initiated mandate changes from AllPay (AKA MOD336)",
+        "FTP"
+      )
     }
   }
 }
