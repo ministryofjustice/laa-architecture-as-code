@@ -4,6 +4,7 @@ import com.structurizr.model.Container
 import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
+import com.structurizr.view.StaticView
 import com.structurizr.view.ViewSet
 
 class CCMS private constructor() {
@@ -135,9 +136,15 @@ class CCMS private constructor() {
       )
 
       usesAllpay()
+      usesCardProcessing()
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.provider.interactsWith(
+        LegalAidAgencyUsers.citizen,
+        "Makes legal aid application on behalf of"
+      )
+
       LegalAidAgencyUsers.provider.uses(trainingWebsite, "Learns how to use CCMS")
       LegalAidAgencyUsers.provider.uses(providerUserInterface, "Completes applications")
       LegalAidAgencyUsers.meansCaseWorker.uses(oracleForms, "Assesses legal aid applications for means eligibility")
@@ -146,15 +153,14 @@ class CCMS private constructor() {
     }
 
     override fun defineViews(views: ViewSet) {
-      views.createSystemContextView(system, "ccms-context", null).apply {
-        addDefaultElements()
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
-      }
+      views.createSystemContextView(system, "ccms-context", null).apply(addViewElements())
+      views.createContainerView(system, "ccms-context-container", null).apply(addViewElements())
+    }
 
-      views.createContainerView(system, "ccms-context-container", null).apply {
-        addDefaultElements()
-        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
-      }
+    private fun addViewElements(): StaticView.() -> Unit = {
+      addDefaultElements()
+      add(LegalAidAgencyUsers.citizen)
+      enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
     }
 
     private fun usesAllpay() {
@@ -173,6 +179,20 @@ class CCMS private constructor() {
       soa.uses(
         Allpay.system,
         "Pulls mandate confirmations, and any bank initiated mandate changes from AllPay (AKA MOD336)",
+        "FTP"
+      )
+    }
+
+    private fun usesCardProcessing() {
+      soa.uses(
+        Eckoh.system,
+        "Pulls daily attempted card payment details (AKA MOD331)",
+        "FTP"
+      )
+
+      soa.uses(
+        Barclaycard.system,
+        "Pulls processed card payments into Oracle Financials accounts receivables (AKA MOD332)",
         "FTP"
       )
     }
