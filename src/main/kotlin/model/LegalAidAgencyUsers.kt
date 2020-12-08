@@ -17,7 +17,7 @@ class LegalAidAgencyUsers private constructor() {
     lateinit var contactCentreOperator: Person
 
     override fun defineModelEntities(model: Model) {
-      citizen = model.addPerson(Location.External, "A member of the public in England and Wales", null)
+      citizen = model.addPerson(Location.External, "A member of the public in England or Wales", null)
       provider = model.addPerson(Location.External, "Legal Aid Provider", null)
 
       crimeApplicationCaseWorker = model.addPerson(
