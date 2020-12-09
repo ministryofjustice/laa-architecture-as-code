@@ -18,6 +18,7 @@ class CCR private constructor() {
         "The CCR system is a web service that Manages Advocate fee claims."
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       web = system.addContainer(

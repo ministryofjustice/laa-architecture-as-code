@@ -21,7 +21,9 @@ class Apply private constructor() {
         "Apply",
         "The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to " +
           "enter applications for legal aid on-line"
-      )
+      ).apply {
+        Tags.GET_LEGAL_AID.addTo(this)
+      }
 
       web = system.addContainer(
         "Apply UI",

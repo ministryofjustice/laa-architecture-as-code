@@ -11,6 +11,9 @@ class OSPlacesAPI private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("OS Places", "Ordnance Survey postcode lookup API").apply {
         OutsideLAA.addTo(this)
+      }.apply {
+        Tags.GET_ACCESS.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

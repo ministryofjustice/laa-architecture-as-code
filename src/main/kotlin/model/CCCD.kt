@@ -25,6 +25,7 @@ class CCCD private constructor() {
           "done on behalf of defendants in criminal proceedings."
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       web = system.addContainer(

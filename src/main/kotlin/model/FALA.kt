@@ -22,7 +22,9 @@ class FALA private constructor() {
       system = model.addSoftwareSystem(
         "Find a Legal Adviser",
         "Search for a legal adviser or family mediator with a legal aid contract in England and Wales"
-      )
+      ).apply {
+        Tags.GET_ACCESS.addTo(this)
+      }
 
       web = system.addContainer(
         "Find a Legal Adviser UI",

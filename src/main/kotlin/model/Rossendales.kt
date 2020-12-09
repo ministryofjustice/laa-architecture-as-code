@@ -14,6 +14,7 @@ class Rossendales private constructor() {
         "Debt collections agency"
       ).apply {
         OutsideLAA.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

@@ -16,7 +16,9 @@ class BenefitChecker private constructor() {
         "Benefit Checker",
         "An interface between the Legal Aid Agency and the Department of Work & Pensions, providing access to the " +
           "latest pass-ported benefit entitlement checks"
-      )
+      ).apply {
+        Tags.GET_LEGAL_AID.addTo(this)
+      }
 
       api = system.addContainer("Benefit Checker API", "An XML API interface for Benefit Checker", "Java").apply {
         setUrl("https://github.com/ministryofjustice/laa-benefitchecker-1.0-big")

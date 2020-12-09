@@ -11,6 +11,8 @@ class Geckoboard private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("Geckoboard", "Metrics dashboard").apply {
         OutsideLAA.addTo(this)
+      }.apply {
+        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

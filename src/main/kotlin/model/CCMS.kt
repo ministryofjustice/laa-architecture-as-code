@@ -24,7 +24,9 @@ class CCMS private constructor() {
       system = model.addSoftwareSystem(
         "Client and Cost Management System",
         "Legal aid applications, case management, financials, billing, and more"
-      )
+      ).apply {
+        Tags.GET_LEGAL_AID.addTo(this)
+      }
 
       providerDetailsAPI = system.addContainer(
         "Provider Details API",

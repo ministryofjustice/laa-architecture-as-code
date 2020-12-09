@@ -17,6 +17,7 @@ class CIS private constructor() {
         "CIS is a legacy system that has been largely superseded but still performs invoicing services"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-cis")
+        Tags.GET_PAID.addTo(this)
       }
 
       db = system.addContainer(

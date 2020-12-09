@@ -11,6 +11,7 @@ class SendGrid private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("SendGrid", "Service for sending transactional email").apply {
         OutsideLAA.addTo(this)
+        Tags.GET_ACCESS.addTo(this)
       }
     }
 

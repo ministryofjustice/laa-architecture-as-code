@@ -14,7 +14,10 @@ class EligibilityCalculator private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Civil Legal Aid Eligibility Calculator",
-        "A service for assessing financial eligibility for civil legal aid")
+        "A service for assessing financial eligibility for civil legal aid"
+      ).apply {
+        Tags.GET_ACCESS.addTo(this)
+      }
 
       web = system.addContainer(
         "Eligibility Calculator UI",

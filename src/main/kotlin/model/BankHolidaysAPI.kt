@@ -11,6 +11,8 @@ class BankHolidaysAPI private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("BankHolidaysAPI", "GOVUK Bank Holiday API").apply {
         OutsideLAA.addTo(this)
+      }.apply {
+        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 
