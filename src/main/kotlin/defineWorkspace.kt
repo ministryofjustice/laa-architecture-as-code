@@ -77,6 +77,7 @@ private fun defineRelationships() {
 
 private fun defineViews(views: ViewSet) {
   MODEL_ITEMS.forEach { it.defineViews(views) }
+  defineFilteredViews(TAGS_FOR_FILTER_VIEWS, views)
   defineGlobalViews(views)
 }
 
@@ -93,7 +94,6 @@ fun defineWorkspace(): Workspace {
   defineViews(workspace.views)
   defineStyles(workspace.views.configuration.styles)
   defineDocumentation(workspace)
-  defineFilteredViews(TAGS_FOR_FILTER_VIEWS, workspace.views)
 
   return workspace
 }
