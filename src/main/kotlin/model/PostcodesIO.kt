@@ -14,7 +14,6 @@ class PostcodesIO private constructor() {
         "API for looking up information about UK postcodes"
       ).apply {
         OutsideLAA.addTo(this)
-        Tags.GET_ACCESS.addTo(this)
       }
     }
 

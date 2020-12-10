@@ -14,7 +14,6 @@ class GOVUKNotify private constructor() {
         "Sends emails, text messages, and letters to government digital services users"
       ).apply {
         OutsideLAA.addTo(this)
-        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

@@ -11,7 +11,6 @@ class TrueLayer private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("TrueLayer", "Open banking data API").apply {
         OutsideLAA.addTo(this)
-        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

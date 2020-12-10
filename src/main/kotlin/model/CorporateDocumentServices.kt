@@ -14,7 +14,6 @@ class CorporateDocumentServices private constructor() {
         "Correspondence and Cheque printing and posting"
       ).apply {
         OutsideLAA.addTo(this)
-        Tags.GET_LEGAL_AID.addTo(this)
       }
     }
 

@@ -26,6 +26,7 @@ class CCMS private constructor() {
         "Legal aid applications, case management, financials, billing, and more"
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       providerDetailsAPI = system.addContainer(
