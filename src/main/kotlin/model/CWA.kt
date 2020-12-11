@@ -61,6 +61,7 @@ class CWA private constructor() {
         "Pushes claims, provider names, addresses, bank accounts, VAT numbers, contact details, and contract flags to",
         "HUB"
       )
+      db.uses(Portal.system, "Copies user accounts and roles to", "Oracle Directory Integration Platform")
     }
 
     override fun defineUserRelationships() {
