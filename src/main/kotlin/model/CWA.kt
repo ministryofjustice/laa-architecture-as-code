@@ -56,6 +56,11 @@ class CWA private constructor() {
       )
 
       db.uses(MAAT.db, "Pushes provider names and office addresses to", "HUB")
+      db.uses(
+        CIS.db,
+        "Pushes claims, provider names, addresses, bank accounts, VAT numbers, contact details, and contract flags to",
+        "HUB"
+      )
     }
 
     override fun defineUserRelationships() {
