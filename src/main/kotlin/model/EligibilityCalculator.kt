@@ -17,6 +17,7 @@ class EligibilityCalculator private constructor() {
         "A service for assessing financial eligibility for civil legal aid"
       ).apply {
         Tags.GET_ACCESS.addTo(this)
+        Tags.LIVE.addTo(this)
       }
 
       web = system.addContainer(

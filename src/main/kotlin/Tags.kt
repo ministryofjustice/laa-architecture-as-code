@@ -7,6 +7,10 @@ enum class Tags : addTo {
   GET_LEGAL_AID,
   GET_PAID,
   CRIME,
+  ALPHA,
+  BETA,
+  LIVE,
+  LEGACY,
   DATABASE,
   WEB_BROWSER,
   EXTERNAL_USER {

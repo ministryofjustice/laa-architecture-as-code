@@ -26,6 +26,7 @@ class CCCD private constructor() {
       ).apply {
         Tags.CRIME.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.LIVE.addTo(this)
       }
 
       web = system.addContainer(

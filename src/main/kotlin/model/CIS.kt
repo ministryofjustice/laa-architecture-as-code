@@ -19,6 +19,7 @@ class CIS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-cis")
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       db = system.addContainer(

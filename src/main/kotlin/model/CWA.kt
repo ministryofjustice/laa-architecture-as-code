@@ -21,6 +21,7 @@ class CWA private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-cwa")
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       ebs = system.addContainer(

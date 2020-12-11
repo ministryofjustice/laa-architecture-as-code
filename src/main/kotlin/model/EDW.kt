@@ -18,6 +18,7 @@ class EDW private constructor() {
         "Data lakes for the Management Information team"
       ).apply {
         setUrl("https://github.com/ministryofjustice/")
+        Tags.LEGACY.addTo(this)
       }
 
       edw003 = system.addContainer(

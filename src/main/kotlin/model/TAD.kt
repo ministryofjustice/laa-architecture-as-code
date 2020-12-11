@@ -18,6 +18,7 @@ class TAD private constructor() {
         "A system for managing tender assessments"
       ).apply {
         Tags.GET_ACCESS.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       tad = system.addContainer(

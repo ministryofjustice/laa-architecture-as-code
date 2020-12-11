@@ -27,6 +27,7 @@ class CCMS private constructor() {
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       providerDetailsAPI = system.addContainer(

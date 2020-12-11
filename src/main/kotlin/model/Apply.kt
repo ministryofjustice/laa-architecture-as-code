@@ -23,6 +23,7 @@ class Apply private constructor() {
           "enter applications for legal aid on-line"
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
+        Tags.BETA.addTo(this)
       }
 
       web = system.addContainer(

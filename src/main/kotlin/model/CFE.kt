@@ -17,6 +17,7 @@ class CFE private constructor() {
         "A service for checking financial eligibility for legal aid"
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
+        Tags.BETA.addTo(this)
       }
 
       api = system.addContainer(

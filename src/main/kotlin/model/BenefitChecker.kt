@@ -18,6 +18,7 @@ class BenefitChecker private constructor() {
           "latest pass-ported benefit entitlement checks"
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       api = system.addContainer("Benefit Checker API", "An XML API interface for Benefit Checker", "Java").apply {

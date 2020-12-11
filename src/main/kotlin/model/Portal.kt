@@ -12,6 +12,7 @@ class Portal private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("Portal", "Single sign on for the LAA").apply {
         setUrl("https://github.com/ministryofjustice/laa-portal")
+        Tags.LEGACY.addTo(this)
       }
     }
 

@@ -24,6 +24,7 @@ class FALA private constructor() {
         "Search for a legal adviser or family mediator with a legal aid contract in England and Wales"
       ).apply {
         Tags.GET_ACCESS.addTo(this)
+        Tags.LIVE.addTo(this)
       }
 
       web = system.addContainer(

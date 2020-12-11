@@ -18,6 +18,7 @@ class ERIC private constructor() {
         "Financial reports for legal aid providers based on Management Information data"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-eric-emi")
+        Tags.LEGACY.addTo(this)
       }
 
       web = system.addContainer(
