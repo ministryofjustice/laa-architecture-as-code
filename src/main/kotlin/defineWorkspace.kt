@@ -44,7 +44,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Rossendales,
   Allpay,
   Eckoh,
-  Barclaycard
+  Barclaycard,
+  eForms
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(

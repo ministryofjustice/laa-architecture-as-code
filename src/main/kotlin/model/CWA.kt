@@ -62,6 +62,7 @@ class CWA private constructor() {
         "HUB"
       )
       db.uses(Portal.system, "Copies user accounts and roles to", "Oracle Directory Integration Platform")
+      db.uses(eForms.system, "Pushes provider names and user accounts with eForm roles to", "HUB")
     }
 
     override fun defineUserRelationships() {
