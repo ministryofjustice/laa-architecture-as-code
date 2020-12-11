@@ -16,7 +16,9 @@ class TAD private constructor() {
       system = model.addSoftwareSystem(
         "Tender Assessment Database",
         "A system for managing tender assessments"
-      )
+      ).apply {
+        Tags.GET_ACCESS.addTo(this)
+      }
 
       tad = system.addContainer(
         "Tender Asssessment Database",

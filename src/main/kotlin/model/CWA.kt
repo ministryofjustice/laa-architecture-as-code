@@ -19,6 +19,8 @@ class CWA private constructor() {
         "CWA is a billing system that contains all provider contracts and schedules"
       ).apply {
         setUrl("https://github.com/ministryofjustice/laa-cwa")
+        Tags.GET_LEGAL_AID.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       ebs = system.addContainer(

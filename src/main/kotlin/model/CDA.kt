@@ -22,6 +22,7 @@ class CDA private constructor() {
           "to HMCTS Common Platform (CP)"
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
 
       api = system.addContainer(

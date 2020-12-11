@@ -48,6 +48,9 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(
+  Tags.GET_ACCESS,
+  Tags.GET_LEGAL_AID,
+  Tags.GET_PAID,
   Tags.CRIME
 )
 

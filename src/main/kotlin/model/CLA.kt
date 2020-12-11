@@ -22,7 +22,9 @@ class CLA private constructor() {
       system = model.addSoftwareSystem(
         "Civil Legal Advice",
         "Service for citizens to check if they are eligible for legal aid"
-      )
+      ).apply {
+        Tags.GET_ACCESS.addTo(this)
+      }
 
       claPublic = system.addContainer(
         "Civil Legal Advice Public UI",

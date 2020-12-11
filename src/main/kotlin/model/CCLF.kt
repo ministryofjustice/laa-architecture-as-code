@@ -18,6 +18,7 @@ class CCLF private constructor() {
         "The CCLF system is a web service that manages litigators fee claims."
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       web = system.addContainer(

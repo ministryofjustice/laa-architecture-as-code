@@ -17,6 +17,7 @@ class InfoX private constructor() {
         "Adapter for LAA to HMCTS's Libra"
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
 
       app = system.addContainer(

@@ -14,7 +14,10 @@ class CFE private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Check Financial Eligibility",
-        "A service for checking financial eligibility for legal aid")
+        "A service for checking financial eligibility for legal aid"
+      ).apply {
+        Tags.GET_LEGAL_AID.addTo(this)
+      }
 
       api = system.addContainer(
         "Check Financial Eligibility API",

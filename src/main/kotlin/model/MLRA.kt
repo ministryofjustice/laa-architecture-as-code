@@ -17,6 +17,7 @@ class MLRA private constructor() {
         "The MLRA system provides an interface between MAAT and HMCTS's LIBRA application for Caseworkers"
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
 
       web = system.addContainer(

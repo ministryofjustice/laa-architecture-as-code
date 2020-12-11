@@ -18,6 +18,7 @@ class NOLASA private constructor() {
           "database once a day and auto-searches the HMCTS Libra system"
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
 
       app = system.addContainer(

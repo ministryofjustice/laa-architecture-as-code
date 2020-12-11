@@ -18,6 +18,7 @@ class MAAT private constructor() {
         "The MAAT system is a collection of applications are used in the application process for Criminal Legal Aid"
       ).apply {
         Tags.CRIME.addTo(this)
+        Tags.GET_LEGAL_AID.addTo(this)
       }
 
       api = system.addContainer(
