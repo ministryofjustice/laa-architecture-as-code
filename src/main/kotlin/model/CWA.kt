@@ -56,6 +56,13 @@ class CWA private constructor() {
       )
 
       db.uses(MAAT.db, "Pushes provider names and office addresses to", "HUB")
+      db.uses(
+        CIS.db,
+        "Pushes claims, provider names, addresses, bank accounts, VAT numbers, contact details, and contract flags to",
+        "HUB"
+      )
+      db.uses(Portal.system, "Copies user accounts and roles to", "Oracle Directory Integration Platform")
+      db.uses(eForms.system, "Pushes provider names and user accounts with eForm roles to", "HUB")
     }
 
     override fun defineUserRelationships() {
