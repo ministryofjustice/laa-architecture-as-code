@@ -4,6 +4,7 @@ import com.structurizr.model.Container
 import com.structurizr.model.InteractionStyle
 import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
+import com.structurizr.view.AutomaticLayout
 import com.structurizr.view.ViewSet
 
 class CIS private constructor() {
@@ -65,6 +66,15 @@ class CIS private constructor() {
     }
 
     override fun defineViews(views: ViewSet) {
+      views.createSystemContextView(system, "cis-context", null).apply {
+        addDefaultElements()
+        enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300)
+      }
+
+      views.createContainerView(system, "cis-container", null).apply {
+        addDefaultElements()
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
+      }
     }
   }
 }
