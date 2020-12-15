@@ -9,6 +9,7 @@ import com.structurizr.view.ViewSet
 class MAAT private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
+    lateinit var web: Container
     lateinit var api: Container
     lateinit var db: Container
 
@@ -19,6 +20,16 @@ class MAAT private constructor() {
       ).apply {
         Tags.CRIME.addTo(this)
         Tags.GET_LEGAL_AID.addTo(this)
+      }
+
+      web = system.addContainer(
+        "MAAT UI",
+        "A Web application that manages applications for Criminal Legal Aid",
+        "Java TomEE"
+      ).apply {
+        setUrl("https://github.com/ministryofjustice/laa-maat-application")
+        AWSLegacy.ec2.add(this)
+        Tags.WEB_BROWSER.addTo(this)
       }
 
       api = system.addContainer(
@@ -66,12 +77,27 @@ class MAAT private constructor() {
         null,
         tagsToArgument(Tags.CRIME)
       )
+
+      db.uses(
+        eForms.system,
+        "Loads completed & submitted forms",
+        "HUB (MAAT9)",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(
+        web,
+        "Access to Case Management tasks and assess means & merits for Legal Aid",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

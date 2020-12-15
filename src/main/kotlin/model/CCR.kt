@@ -73,9 +73,24 @@ class CCR private constructor() {
         null,
         tagsToArgument(Tags.CRIME)
       )
+
+      db.uses(
+        MAAT.db,
+        "Loads defendant data from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
+      db.uses(
+        Xhibit.system,
+        "Takes case data from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineUserRelationships() {

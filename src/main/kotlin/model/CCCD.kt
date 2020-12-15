@@ -83,6 +83,13 @@ class CCCD private constructor() {
     }
 
     override fun defineRelationships() {
+      web.uses(
+        FeeCalculator.api,
+        "Uses API to calculator fees",
+        "REST",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

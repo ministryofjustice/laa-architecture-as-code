@@ -19,6 +19,7 @@ class CIS private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-cis")
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.CRIME.addTo(this)
       }
 
       db = system.addContainer(
@@ -34,6 +35,20 @@ class CIS private constructor() {
     }
 
     override fun defineRelationships() {
+      db.uses(
+        CCR.db,
+        "Takes claim from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      db.uses(
+        CCLF.db,
+        "Takes claim from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {

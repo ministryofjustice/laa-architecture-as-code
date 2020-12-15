@@ -81,7 +81,6 @@ class Apply private constructor() {
       LegalAidAgencyUsers.citizen.uses(web, "Applies for legal aid using")
       LegalAidAgencyUsers.citizen.uses(TrueLayer.system, "Gives bank access authorisation to")
       LegalAidAgencyUsers.provider.uses(web, "Fills legal aid application through")
-      LegalAidAgencyUsers.provider.uses(Portal.system, "Provides login credentials through")
       GOVUKNotify.system.delivers(LegalAidAgencyUsers.citizen, "Sends email to")
     }
 

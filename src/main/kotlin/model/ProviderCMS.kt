@@ -4,14 +4,14 @@ import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ViewSet
 
-class Allpay private constructor() {
+class ProviderCMS private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "allpay",
-        "Direct Debit payment processor"
+        "Provider CMS",
+        "Provider's Content Management System. This is unique to each Provider."
       ).apply {
         OutsideLAA.addTo(this)
         Tags.CRIME.addTo(this)
@@ -22,13 +22,22 @@ class Allpay private constructor() {
     }
 
     override fun defineRelationships() {
+      system.uses(
+        CCCD.web,
+        "Forwards the claim to",
+        "REST",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
+      LegalAidAgencyUsers.provider.uses(
+        system, "Submits a claim", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineUserRelationships() {
-      system.uses(LegalAidAgencyUsers.provider, "Pays", null, null, tagsToArgument(Tags.CRIME))
     }
 
     override fun defineViews(views: ViewSet) {

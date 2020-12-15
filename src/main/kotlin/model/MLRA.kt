@@ -55,6 +55,13 @@ class MLRA private constructor() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(
+        web,
+        "To record LAA decisions and send them to Magistrates Courts and to review Magistrates/Crown Court decisions",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

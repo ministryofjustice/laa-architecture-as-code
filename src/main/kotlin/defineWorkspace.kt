@@ -46,7 +46,10 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Eckoh,
   Barclaycard,
   eForms,
-  BankAccounts
+  BankAccounts,
+  Xhibit,
+  FeeCalculator,
+  ProviderCMS
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(

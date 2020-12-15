@@ -4,14 +4,14 @@ import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ViewSet
 
-class Allpay private constructor() {
+class Xhibit private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "allpay",
-        "Direct Debit payment processor"
+        "HMCTS Xhibit",
+        "Legacy application that contains information about Court Cases in Crown Courts"
       ).apply {
         OutsideLAA.addTo(this)
         Tags.CRIME.addTo(this)
@@ -22,13 +22,22 @@ class Allpay private constructor() {
     }
 
     override fun defineRelationships() {
+      system.uses(
+        MAAT.db,
+        "Provides Crown Court Outcomes (XMAT1, XMAT2)",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
     }
 
     override fun defineUserRelationships() {
-      system.uses(LegalAidAgencyUsers.provider, "Pays", null, null, tagsToArgument(Tags.CRIME))
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        system, "Retrives hearing data from Live & Portal applications", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

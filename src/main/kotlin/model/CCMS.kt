@@ -27,6 +27,7 @@ class CCMS private constructor() {
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.CRIME.addTo(this)
       }
 
       providerDetailsAPI = system.addContainer(
@@ -116,6 +117,8 @@ class CCMS private constructor() {
     override fun defineRelationships() {
       soa.uses(CWA.db, "Looks up provider contracts", "JDBC")
       soa.uses(BenefitChecker.system, "Validates Universal Credit claimants via", "SOAP")
+
+      ebsDb.uses(CIS.db, "Loads payment transactions from", "HUB", null, tagsToArgument(Tags.CRIME))
     }
 
     override fun defineExternalRelationships() {
@@ -176,13 +179,17 @@ class CCMS private constructor() {
       system.uses(
         Allpay.system,
         "Pushes Direct Debit mandate instructions",
-        "FTP"
+        "FTP",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
 
       soa.uses(
         Allpay.system,
         "Pushes Direct Debit mandate instructions (AKA MOD333)",
-        "FTP"
+        "FTP",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
 
       soa.uses(
