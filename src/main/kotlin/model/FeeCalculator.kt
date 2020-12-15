@@ -18,7 +18,7 @@ class FeeCalculator private constructor() {
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.CRIME.addTo(this)
-       }
+      }
 
       api = system.addContainer("Fee Calculator API", "A JSON API interface for Fee Calculations", "Python").apply {
         setUrl("https://github.com/ministryofjustice/laa-fee-calculator")
