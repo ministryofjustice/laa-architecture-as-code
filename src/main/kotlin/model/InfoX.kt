@@ -18,6 +18,7 @@ class InfoX private constructor() {
       ).apply {
         Tags.CRIME.addTo(this)
         Tags.GET_LEGAL_AID.addTo(this)
+        Tags.LEGACY.addTo(this)
       }
 
       app = system.addContainer(

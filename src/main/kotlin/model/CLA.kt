@@ -24,6 +24,7 @@ class CLA private constructor() {
         "Service for citizens to check if they are eligible for legal aid"
       ).apply {
         Tags.GET_ACCESS.addTo(this)
+        Tags.LIVE.addTo(this)
       }
 
       claPublic = system.addContainer(
