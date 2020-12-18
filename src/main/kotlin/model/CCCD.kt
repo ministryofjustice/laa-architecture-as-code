@@ -85,7 +85,7 @@ class CCCD private constructor() {
     override fun defineRelationships() {
       web.uses(
         FeeCalculator.api,
-        "Uses API to calculator fees",
+        "Uses API to calculate fees",
         "REST",
         null,
         tagsToArgument(Tags.CRIME)

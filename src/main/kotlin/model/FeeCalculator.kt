@@ -14,7 +14,7 @@ class FeeCalculator private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
         "Fee Calculator",
-        "A system that keeps track of Fee Schemes and provides an API to query specific this large dataset"
+        "A system that keeps track of Fee Schemes and provides an API to query this large dataset"
       ).apply {
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.CRIME.addTo(this)
