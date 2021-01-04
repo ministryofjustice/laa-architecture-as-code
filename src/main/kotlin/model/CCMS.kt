@@ -140,6 +140,12 @@ class CCMS private constructor() {
 
       usesAllpay()
       usesCardProcessing()
+
+      soa.uses(
+        BankAccounts.system,
+        "Pulls payment transactions into the EBusiness Suite General Ledger",
+        "FTP"
+      )
     }
 
     override fun defineUserRelationships() {
