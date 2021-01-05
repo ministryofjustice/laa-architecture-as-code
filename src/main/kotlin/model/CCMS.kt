@@ -179,17 +179,13 @@ class CCMS private constructor() {
       system.uses(
         Allpay.system,
         "Pushes Direct Debit mandate instructions",
-        "FTP",
-        null,
-        tagsToArgument(Tags.CRIME)
+        "FTP"
       )
 
       soa.uses(
         Allpay.system,
         "Pushes Direct Debit mandate instructions (AKA MOD333)",
-        "FTP",
-        null,
-        tagsToArgument(Tags.CRIME)
+        "FTP"
       )
 
       soa.uses(

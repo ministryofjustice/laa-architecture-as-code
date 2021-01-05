@@ -14,7 +14,6 @@ class Allpay private constructor() {
         "Direct Debit payment processor"
       ).apply {
         OutsideLAA.addTo(this)
-        Tags.CRIME.addTo(this)
       }
     }
 
