@@ -27,7 +27,6 @@ class Allpay private constructor() {
     }
 
     override fun defineUserRelationships() {
-      system.uses(LegalAidAgencyUsers.provider, "Pays", null, null, tagsToArgument(Tags.CRIME))
     }
 
     override fun defineViews(views: ViewSet) {
