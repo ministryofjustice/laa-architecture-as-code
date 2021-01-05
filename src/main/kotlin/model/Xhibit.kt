@@ -23,9 +23,9 @@ class Xhibit private constructor() {
 
     override fun defineRelationships() {
       system.uses(
-        MAAT.db,
-        "Provides Crown Court Outcomes (XMAT1, XMAT2)",
-        "HUB",
+        HUB.system,
+        "Provides Crown Court Outcomes",
+        "FTP",
         null,
         tagsToArgument(Tags.CRIME)
       )

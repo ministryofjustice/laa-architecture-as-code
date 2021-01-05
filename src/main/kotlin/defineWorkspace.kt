@@ -49,7 +49,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   BankAccounts,
   Xhibit,
   FeeCalculator,
-  ProviderCMS
+  ProviderCMS,
+  HUB
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(

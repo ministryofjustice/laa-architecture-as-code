@@ -84,13 +84,6 @@ class CCR private constructor() {
     }
 
     override fun defineExternalRelationships() {
-      db.uses(
-        Xhibit.system,
-        "Takes case data from",
-        "HUB",
-        null,
-        tagsToArgument(Tags.CRIME)
-      )
     }
 
     override fun defineUserRelationships() {

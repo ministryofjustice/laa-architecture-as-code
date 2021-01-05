@@ -77,14 +77,6 @@ class MAAT private constructor() {
         null,
         tagsToArgument(Tags.CRIME)
       )
-
-      db.uses(
-        eForms.system,
-        "Loads completed & submitted forms",
-        "HUB (MAAT9)",
-        null,
-        tagsToArgument(Tags.CRIME)
-      )
     }
 
     override fun defineExternalRelationships() {
