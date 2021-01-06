@@ -31,20 +31,24 @@ class LegalAidAgencyUsers private constructor() {
         null
       ).apply {
         Tags.EXTERNAL_USER.addTo(this)
+        Tags.CRIME.addTo(this)
       }
 
       crimeApplicationCaseWorker = model.addPerson(
         Location.Internal,
         "Crime application caseworker",
         "A caseworker who manages applications for criminal legal aid"
-      )
-      crimeApplicationCaseWorker.addTags(Tags.CRIME.toString())
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       billingCaseWorker = model.addPerson(
         Location.Internal,
         "Billing caseworker",
         "A caseworker who verifies legal aid provider's bills"
-      )
+      ).apply {
+        Tags.CRIME.addTo(this)
+      }
 
       meansCaseWorker = model.addPerson(
         Location.Internal,
@@ -57,7 +61,6 @@ class LegalAidAgencyUsers private constructor() {
         "Merits caseworker",
         "A caseworker who assesses legal aid applications for merits"
       )
-      billingCaseWorker.addTags(Tags.CRIME.toString())
 
       directServicesTeam = model.addPerson(
         Location.Internal,

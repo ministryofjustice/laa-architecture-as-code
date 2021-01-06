@@ -51,9 +51,24 @@ class CCLF private constructor() {
       web.uses(CCCD.sqsCCLF, "Processes job to know to pull claim information")
       web.uses(CCCD.sqsProcessResponse, "Notifies CCCD of success/failure of claim")
       web.uses(CCCD.web, "Pulls claims from", "HTTP API")
+
+      db.uses(
+        MAAT.db,
+        "Loads defendant data from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
+      db.uses(
+        HUB.db,
+        "Takes Crown Court case data from",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineUserRelationships() {

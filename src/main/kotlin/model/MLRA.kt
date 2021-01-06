@@ -55,6 +55,13 @@ class MLRA private constructor() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.crimeApplicationCaseWorker.uses(
+        web,
+        "To notify Magistrates of LAA legal aid status and to review Magistrates/Crown Court outcomes",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

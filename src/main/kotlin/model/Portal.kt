@@ -12,6 +12,7 @@ class Portal private constructor() {
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem("Portal", "Single sign on for the LAA").apply {
         setUrl("https://github.com/ministryofjustice/laa-portal")
+        Tags.CRIME.addTo(this)
       }
     }
 
@@ -25,6 +26,13 @@ class Portal private constructor() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.provider.uses(
+        system,
+        "Provides login credentials through",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {

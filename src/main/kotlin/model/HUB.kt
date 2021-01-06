@@ -1,34 +1,31 @@
 package uk.gov.justice.laa.architecture
 
 import com.structurizr.model.Container
-import com.structurizr.model.InteractionStyle
 import com.structurizr.model.Model
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.AutomaticLayout
 import com.structurizr.view.ViewSet
 
-class CIS private constructor() {
+class HUB private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
     lateinit var db: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
-        "Corporate Information System",
-        "CIS is a legacy system that has been largely superseded but still performs invoicing services"
+        "HUB",
+        "Links systems, scheduled jobs to copy data around, batch scheduling/ETL coordinator for the LAA."
       ).apply {
-        setUrl("https://github.com/ministryofjustice/laa-cis")
-        Tags.GET_LEGAL_AID.addTo(this)
-        Tags.GET_PAID.addTo(this)
         Tags.CRIME.addTo(this)
+        Tags.GET_PAID.addTo(this)
       }
 
       db = system.addContainer(
-        "Oracle Database",
-        "CIS database",
-        "Oracle"
+        "HUB DB",
+        "Contains the application logic and storage for HUB jobs",
+        "Oracle PL/SQL"
       ).apply {
-        Tags.DATABASE.addTo(this)
+        setUrl("https://github.com/ministryofjustice/laa-hub-application")
       }
     }
 
@@ -37,15 +34,22 @@ class CIS private constructor() {
 
     override fun defineRelationships() {
       db.uses(
-        CCR.db,
-        "Takes claim from",
+        MAAT.db,
+        "Sends Crown Court Outcomes to (XMAT1, XMAT2)",
         "HUB",
         null,
         tagsToArgument(Tags.CRIME)
       )
       db.uses(
-        CCLF.db,
-        "Takes claim from",
+        MAAT.db,
+        "Loads completed & submitted forms (MAAT9)",
+        "HUB",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
+      db.uses(
+        CCR.db,
+        "Sends Case information to (CCR01, CCR08, CCR09)",
         "HUB",
         null,
         tagsToArgument(Tags.CRIME)
@@ -53,12 +57,12 @@ class CIS private constructor() {
     }
 
     override fun defineExternalRelationships() {
-      // TODO: This should be the CIS DB component, not the CIS system
       system.uses(
-        CCMS.ebsDb,
-        "Pushes CIS invoices approved for payment and, after payment, updates status of invoices in CIS",
-        "HUB",
-        InteractionStyle.Asynchronous
+        eForms.system,
+        "Pulls forms that are submitted",
+        "SOAP",
+        null,
+        tagsToArgument(Tags.CRIME)
       )
     }
 
@@ -66,13 +70,14 @@ class CIS private constructor() {
     }
 
     override fun defineViews(views: ViewSet) {
-      views.createSystemContextView(system, "cis-context", null).apply {
+      views.createSystemContextView(system, "hub-context", null).apply {
         addDefaultElements()
-        enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300)
+        enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
 
-      views.createContainerView(system, "cis-container", null).apply {
+      views.createContainerView(system, "hub-container", null).apply {
         addDefaultElements()
+        setExternalSoftwareSystemBoundariesVisible(true)
         enableAutomaticLayout(AutomaticLayout.RankDirection.TopBottom, 300, 300)
       }
     }

@@ -21,6 +21,7 @@ class CWA private constructor() {
         setUrl("https://github.com/ministryofjustice/laa-cwa")
         Tags.GET_LEGAL_AID.addTo(this)
         Tags.GET_PAID.addTo(this)
+        Tags.CRIME.addTo(this)
       }
 
       ebs = system.addContainer(
@@ -44,6 +45,7 @@ class CWA private constructor() {
 
     override fun defineRelationships() {
       db.uses(ERIC.db, "Pushes provider names, users, roles, and offices", "HUB")
+      db.uses(CIS.db, "Injects payments into", "HUB", null, tagsToArgument(Tags.CRIME))
     }
 
     override fun defineExternalRelationships() {
@@ -66,6 +68,9 @@ class CWA private constructor() {
     }
 
     override fun defineUserRelationships() {
+      LegalAidAgencyUsers.billingCaseWorker.uses(
+        ebs, "Prepares payment", null, null, tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineViews(views: ViewSet) {
