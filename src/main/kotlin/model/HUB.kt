@@ -35,18 +35,12 @@ class HUB private constructor() {
     override fun defineRelationships() {
       db.uses(
         MAAT.db,
-        "Sends Crown Court Outcomes to (XMAT1, XMAT2)",
+        "Various HUB Jobs XMAT1, XMAT2, MAAT9 (Crown Court Outcomes + eForms)",
         "HUB",
         null,
         tagsToArgument(Tags.CRIME)
       )
-      db.uses(
-        MAAT.db,
-        "Loads completed & submitted forms (MAAT9)",
-        "HUB",
-        null,
-        tagsToArgument(Tags.CRIME)
-      )
+
       db.uses(
         CCR.db,
         "Sends Case information to (CCR01, CCR08, CCR09)",
