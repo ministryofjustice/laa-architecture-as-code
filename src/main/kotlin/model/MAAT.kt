@@ -77,6 +77,14 @@ class MAAT private constructor() {
         null,
         tagsToArgument(Tags.CRIME)
       )
+
+      web.uses(
+        BenefitChecker.api,
+        "Queries to find out benefit status",
+        "SOAP",
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineExternalRelationships() {
