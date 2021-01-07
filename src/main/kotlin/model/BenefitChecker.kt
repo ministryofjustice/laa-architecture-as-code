@@ -33,6 +33,13 @@ class BenefitChecker private constructor() {
     }
 
     override fun defineExternalRelationships() {
+      api.uses(
+        DWP.benefitChecker,
+        "Relays query to",
+        null,
+        null,
+        tagsToArgument(Tags.CRIME)
+      )
     }
 
     override fun defineUserRelationships() {
