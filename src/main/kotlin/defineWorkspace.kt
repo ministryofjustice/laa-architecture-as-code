@@ -25,6 +25,7 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   VCD,
   CommonPlatform,
   CDA,
+  HUB,
   OSPlacesAPI,
   MAAT,
   BankHolidaysAPI,
@@ -50,7 +51,6 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Xhibit,
   FeeCalculator,
   ProviderCMS,
-  HUB,
   DWP
 )
 
