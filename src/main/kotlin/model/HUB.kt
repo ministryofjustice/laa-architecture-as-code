@@ -35,7 +35,7 @@ class HUB private constructor() {
     override fun defineRelationships() {
       db.uses(
         MAAT.db,
-        "Various HUB Jobs XMAT1, XMAT2, MAAT9 (Crown Court Outcomes + eForms)",
+        "Pushes Crown Court Outcomes and Submitted Crime Application eForms (XMAT1, XMAT2, MAAT9)",
         "HUB",
         null,
         tagsToArgument(Tags.CRIME)
