@@ -10,6 +10,7 @@ import com.structurizr.view.ViewSet
 class CCMS private constructor() {
   companion object : LAASoftwareSystem {
     lateinit var system: SoftwareSystem
+
     lateinit var providerDetailsAPI: Container
     lateinit var soa: Container
     lateinit var ebsDb: Container
@@ -119,6 +120,9 @@ class CCMS private constructor() {
       soa.uses(BenefitChecker.system, "Validates Universal Credit claimants via", "SOAP")
 
       ebsDb.uses(CIS.db, "Loads payment transactions from", "HUB", null, tagsToArgument(Tags.CRIME))
+
+      providerUserInterface.uses(Portal.system, "Authenticates users through", "WebGate")
+      oracleForms.uses(Portal.system, "Authenticates users through", "AccessGate")
     }
 
     override fun defineExternalRelationships() {
