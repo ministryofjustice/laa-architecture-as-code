@@ -16,7 +16,6 @@ class CCMS private constructor() {
     lateinit var oracleForms: Container
     lateinit var providerUserInterface: Container
     lateinit var temporaryDataStore: Container
-    lateinit var trainingWebsite: Container
     lateinit var opaWebDeterminations: Container
     lateinit var connector: Container
 
@@ -71,14 +70,6 @@ class CCMS private constructor() {
         "Forms that provide a UI for interacting with the EBS database",
         "Oracle"
       )
-
-      trainingWebsite = system.addContainer(
-        "CCMS training",
-        "A website with training, guidance and support for external users of CCMS",
-        "Squiz Matrix"
-      ).apply {
-        url = "https://ccmstraining.justice.gov.uk/"
-      }
 
       opaWebDeterminations = system.addContainer(
         "Oracle Web Determinations",
@@ -157,7 +148,6 @@ class CCMS private constructor() {
         "Makes legal aid application on behalf of"
       )
 
-      LegalAidAgencyUsers.provider.uses(trainingWebsite, "Learns how to use CCMS")
       LegalAidAgencyUsers.provider.uses(providerUserInterface, "Completes applications")
       LegalAidAgencyUsers.meansCaseWorker.uses(oracleForms, "Assesses legal aid applications for means eligibility")
       LegalAidAgencyUsers.meritsCaseWorker.uses(oracleForms, "Assesses legal aid applications for merits eligibility")
