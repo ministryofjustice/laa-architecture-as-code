@@ -92,3 +92,10 @@ implementation("com.structurizr:structurizr-core:1.6.2")
 
 Put in the new version(s) and then run: `gradle --refresh-dependencies clean build`. You can then verify the new
 version(s) using `gradle dependencies` to list what has been installed.
+
+# Glossary
+
+|__Word__|__Meaning__|
+|--------|-----------|
+|Internal|A system/person in this boundary means that it is something that the LAA has control over.
+|External|A system/person that the LAA does not have control over.
