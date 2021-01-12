@@ -74,3 +74,18 @@ ktlint src/main/kotlin/model/Apply.kt
 ```
 
 Add the `-F` argument to attempt to automatically fix any linting errors.
+
+## Structurizr API
+
+We use the Structurizr service to generate and display the diagrams. We use a Java plugin to create diagrams in PlantUML for local use and to export them to the Structurizr service. The API docs can be found here: https://github.com/structurizr/java
+
+### Updating Structurizr
+
+Open the `./build.gradle.kts` change the following lines:
+
+```
+implementation("com.structurizr:structurizr-client:1.6.2")
+implementation("com.structurizr:structurizr-core:1.6.2")
+```
+
+Put in the new version(s) and then run: `gradle --refresh-dependencies clean build`. You can then verify the new version(s) using `gradle dependencies` to list what has been installed.
