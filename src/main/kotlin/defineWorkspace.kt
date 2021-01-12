@@ -51,7 +51,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Xhibit,
   FeeCalculator,
   ProviderCMS,
-  DWP
+  DWP,
+  ProviderTraining
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(
