@@ -97,5 +97,5 @@ version(s) using `gradle dependencies` to list what has been installed.
 
 |__Word__|__Meaning__|
 |--------|-----------|
-|Internal|A system/person in this boundary means that it is something that the LAA has control over.
-|External|A system/person that the LAA does not have control over.
+|Internal|A software system is internal if the LAA is responsible for the product or service it provides.
+|External|A software system is external if LAA is one customer, of many, for the product/service.
