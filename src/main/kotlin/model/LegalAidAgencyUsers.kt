@@ -27,7 +27,7 @@ class LegalAidAgencyUsers private constructor() {
 
       provider = model.addPerson(
         Location.External,
-        "Lega Aid Provider",
+        "Legal Aid Provider",
         null
       ).apply {
         Tags.EXTERNAL_USER.addTo(this)
