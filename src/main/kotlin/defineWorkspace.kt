@@ -52,7 +52,8 @@ private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   FeeCalculator,
   ProviderCMS,
   DWP,
-  ProviderTraining
+  ProviderTraining,
+  GoogleMaps
 )
 
 private val TAGS_FOR_FILTER_VIEWS = listOf<Tags>(
