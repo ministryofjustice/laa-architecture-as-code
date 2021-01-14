@@ -80,6 +80,7 @@ class FALA private constructor() {
 
     override fun defineExternalRelationships() {
       laalaa.uses(PostcodesIO.system, "Looks up postcode latitude and longitude from", "REST")
+      web.uses(GoogleMaps.system, "Renders map of legal advisor locations")
     }
 
     override fun defineUserRelationships() {
