@@ -17,7 +17,8 @@ class CCMS private constructor() {
     lateinit var providerUserInterface: Container
     lateinit var temporaryDataStore: Container
     lateinit var opaWebDeterminations: Container
-    lateinit var connector: Container
+    lateinit var meansMeritsConnector: Container
+    lateinit var formsConnector: Container
 
     override fun defineModelEntities(model: Model) {
       system = model.addSoftwareSystem(
@@ -79,12 +80,20 @@ class CCMS private constructor() {
         url = "https://github.com/ministryofjustice/laa-ccms-opa-policy-models"
       }
 
-      connector = system.addContainer(
-        "Connector",
+      meansMeritsConnector = system.addContainer(
+        "Means and merits connector",
         "Web Determinations data adaptor plugin",
         "Java"
       ).apply {
         url = "https://github.com/ministryofjustice/laa-ccms-pui"
+      }
+
+      formsConnector = system.addContainer(
+        "Forms connector",
+        "Web Determinations data adaptor plugin that emails form submissions to inboxes",
+        "Java"
+      ).apply {
+        url = "https://github.com/ministryofjustice/laa-ccms-forms-connector"
       }
     }
 
@@ -92,9 +101,10 @@ class CCMS private constructor() {
       soa.uses(ebsDb, "Connects to")
       providerDetailsAPI.uses(ebsDb, "Connects to")
 
-      connector.uses(temporaryDataStore, "Reads and writes data to")
+      meansMeritsConnector.uses(temporaryDataStore, "Reads and writes data to")
 
-      opaWebDeterminations.uses(connector, "Reads and writes applications to")
+      opaWebDeterminations.uses(meansMeritsConnector, "Reads and writes applications to")
+      opaWebDeterminations.uses(formsConnector, "Sends completed feedback, and fraud forms for emailing")
 
       providerUserInterface.uses(temporaryDataStore, "Reads and writes data to")
       providerUserInterface.uses(soa, "Reads and writes applications to", "SOAP")
