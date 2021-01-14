@@ -4,9 +4,23 @@
 [publish badge]: https://github.com/ministryofjustice/laa-architecture-as-code/workflows/Publish/badge.svg
 [build badge]: https://github.com/ministryofjustice/laa-architecture-as-code/workflows/Build%20and%20validate/badge.svg
 
-# laa-architecture-as-code
+# Legal Aid Agency Architecture Documentation
 
 Modelling architecture in Legal Aid Agency (LAA) with the [C4 model][c4] and [Structurizr][structurizr].
+
+## Key Outputs
+
+* [System landscape diagram][system-landscape-diagram] showing all LAA software systems hosted on
+  [Structurizr.com][structurizr-system-landscape].
+* [System context diagrams][system-context-diagram] showing a singular software system and its relationships which can
+  be accessed from the landscape diagram above.
+* [Container diagrams][container-diagram] showing the components, e.g. databases, applications for a software system
+  which can be accessed from a system context diagram.
+
+[structurizr-system-landscape]: https://structurizr.com/share/55246/diagrams#system-overview
+[system-landscape-diagram]: https://c4model.com/#SystemLandscapeDiagram
+[system-context-diagram]: https://c4model.com/#SystemContextDiagram
+[container-diagram]: https://c4model.com/#ContainerDiagram
 
 ## Running locally
 
