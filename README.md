@@ -92,3 +92,10 @@ implementation("com.structurizr:structurizr-core:1.6.2")
 
 Put in the new version(s) and then run: `gradle --refresh-dependencies clean build`. You can then verify the new
 version(s) using `gradle dependencies` to list what has been installed.
+
+# Glossary
+
+|__Word__|__Meaning__|
+|--------|-----------|
+|Internal|A software system is internal if the LAA is responsible for the product or service it provides.
+|External|A software system is external if LAA is one customer, of many, for the product/service.
