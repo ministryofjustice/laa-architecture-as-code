@@ -154,6 +154,11 @@ class CCMS private constructor() {
         "Pulls payment transactions into the EBusiness Suite General Ledger",
         "FTP"
       )
+
+      providerUserInterface.uses(
+        OSPlacesAPI.system, "Gets address data from",
+        "REST"
+      )
     }
 
     override fun defineUserRelationships() {
