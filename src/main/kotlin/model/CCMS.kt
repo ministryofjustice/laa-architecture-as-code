@@ -112,6 +112,7 @@ class CCMS private constructor() {
       providerUserInterface.uses(opaWebDeterminations, "Serves forms", "SOAP")
 
       oracleForms.uses(ebsDb, "Reads and writes data to")
+      oracleForms.uses(soa, "Invokes SOA composite, including viewing documents, and running a means assessment")
 
       temporaryDataStore.uses(ebsDb, "Reads data from", "Shared database")
     }
