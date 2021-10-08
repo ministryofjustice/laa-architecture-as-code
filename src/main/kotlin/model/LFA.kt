@@ -25,6 +25,7 @@ class LFA private constructor() {
         "Ruby on Rails"
       ).apply {
         setUrl("https://github.com/ministryofjustice/legal-framework-api")
+        CloudPlatform.kubernetes.add(this)
       }
     }
 
