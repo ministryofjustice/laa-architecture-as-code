@@ -65,6 +65,7 @@ class Apply private constructor() {
       web.uses(CCMS.providerDetailsAPI, "Gets provider details from", "REST")
       web.uses(CCMS.soa, "Gets reference data and submits legal aid application through", "SOAP")
       web.uses(CFE.api, "Checks applicant financial eligibility through", "REST")
+      web.uses(LFA.api, "Checks legal aid application requirements", "REST")
       web.uses(BenefitChecker.api, "Checks if applicant receives passported benefit through", "SOAP")
       web.uses(Portal.system, "Authenticates users through", "SAML")
     }
