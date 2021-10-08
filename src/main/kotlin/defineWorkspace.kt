@@ -9,6 +9,8 @@ import com.structurizr.view.ViewSet
 
 private val MODEL_ITEMS = listOf<LAASoftwareSystem>(
   Apply,
+  HMRC,
+  HMRCInterface,
   CCMS,
   CFE,
   BenefitChecker,

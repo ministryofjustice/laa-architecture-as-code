@@ -68,6 +68,7 @@ class Apply private constructor() {
       web.uses(LFA.api, "Checks legal aid application requirements", "REST")
       web.uses(BenefitChecker.api, "Checks if applicant receives passported benefit through", "SOAP")
       web.uses(Portal.system, "Authenticates users through", "SAML")
+      web.uses(HMRCInterface.api, "Checks applicants HMRC employment information through", "REST")
     }
 
     override fun defineExternalRelationships() {
